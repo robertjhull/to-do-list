@@ -60,7 +60,9 @@ const Login = ({ loginForm, toggleForm }) => {
                     onChange={handleChange}
                     required
                 />
-                <button type="submit" className="btn">Sign In</button>
+                <div className="btn-container">
+                    <button type="submit" className="btn">Sign In</button>
+                </div>
                 <div>
                     {Object.values(errors).map((err, index) => (
                         <li key={index} className="error">{err}</li>

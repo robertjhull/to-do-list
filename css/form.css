@@ -1,39 +1,67 @@
 form {
-  width: 90%;
+  width: 80%;
   margin: auto;
-  max-width: 550px;
-}
-input,
-form button,
-label {
-  display: block;
+  display:flex;
+  flex-direction: column;
 }
 form button,
-input,
-textarea {
+input {
   outline: none;
 }
-input,
-textarea {
+.form-col label {
+  line-height: 40px;
+  vertical-align: top;
+  color:#ff0000;
+  font-weight: 600;
+}
+input {
   border: 1px solid rgb(199, 199, 199);
   border-radius: 10px;
-  padding: 10px;
-  font-size: 90%;
-  width: 100%;
-  height: 30px;
   color: rgb(53, 53, 53);
-}
-textarea {
-  height: 50px;
-}
-label {
-  margin-top: 10px;
-}
-form button {
-  --accent: rgb(0, 162, 255);
-  margin-top: 20px;
+  height: 100%;
 }
 
-.form-container {
-  width: 90%;
+input[type=radio] {
+  width: 20px;
+}
+
+#text-input, #tags-input {
+  width: 100%;
+}
+
+.form-row {
+  display:flex;
+  flex-direction: row;
+  height: 40px;
+  margin: 10px 0;
+}
+
+@media screen and (min-width: 601px) {
+  .form-col:nth-of-type(1) {
+    width: 70%;
+  }
+  .form-col {
+    width: 15%;
+  }
+  label, input {
+    font-size: 1.1rem;
+  }
+  .form-col button::after {
+    content: "+ New Note";
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .form-col:nth-of-type(1) {
+    width: 40%;
+  }
+  .form-col {
+    width: 30%;
+  }
+  label, input {
+    font-size: 0.9rem;
+  }
+  .form-col button::after {
+    content: "+ New";
+  }
 }

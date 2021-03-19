@@ -2,58 +2,42 @@ import mongoose from 'mongoose'
 
 /* NoteSchema will correspond to a collection in your MongoDB database. */
 const NoteSchema = new mongoose.Schema({
-  name: {
-    /* The name of this pet */
-
-    type: String,
-    required: [true, 'Please provide a name for this pet.'],
-    maxlength: [20, 'Name cannot be more than 60 characters'],
-  },
-  owner_name: {
-    /* The owner of this pet */
-
-    type: String,
-    required: [true, "Please provide the pet owner's name"],
-    maxlength: [20, "Owner's Name cannot be more than 60 characters"],
-  },
-  species: {
-    /* The species of your pet */
-
-    type: String,
-    required: [true, 'Please specify the species of your pet.'],
-    maxlength: [30, 'Species specified cannot be more than 40 characters'],
-  },
-  age: {
-    /* Pet's age, if applicable */
+  user_id: {
+    /* The owner of the note */
 
     type: Number,
+    required: [true],
   },
-  poddy_trained: {
-    /* Boolean poddy_trained value, if applicable */
+  content: {
+    /* The content of the note */
 
-    type: Boolean,
-  },
-  diet: {
-    /* List of dietary needs, if applicable */
-
-    type: Array,
-  },
-  image_url: {
-    /* Url to pet image */
-
-    required: [true, 'Please provide an image url for this pet.'],
     type: String,
+    required: [true, "Note must have content"],
+    maxLength: [255, "Note cannot be longer than 255 characters"],
   },
-  likes: {
-    /* List of things your pet likes to do */
+  attachment: {
+    /* Attached link or file */
+
+    type: String,
+    require: [false],
+    maxLength: [255, "Attachment cannot be longer than 255 characters"]
+  },
+  tags: {
+    /* The tags of the note for easy lookup */
 
     type: Array,
+    required: [false],
+    maxLength: [30, 'Tags must be 30 characters or less'],
   },
-  dislikes: {
-    /* List of things your pet does not like to do */
+  sub_notes: {
+    /* Sub-notes listed underneath main note */
 
+    required: [false],
     type: Array,
   },
+  finished: {
+    type: Boolean
+  }
 })
 
 export default mongoose.models.Note || mongoose.model('Note', NoteSchema)

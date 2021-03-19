@@ -1,0 +1,52 @@
+table {
+    width: 80%;
+    margin: 5% auto;
+    text-align: left;
+}
+
+tr {
+    height: 40px;
+    transition: box-shadow 400ms ease-in-out;
+}
+
+tr:hover {
+    box-shadow: 1px 1px #22222280;
+    cursor: pointer;
+}
+
+.svg-link {
+    line-height: 40px;
+    vertical-align: middle;
+    width:24px; 
+    height:24px; 
+    fill: #fff;
+}
+
+.td-completed, .td-priority, .td-date {
+    width: 3%;
+}
+
+.td-priority {
+    color:red;
+}
+
+.td-text {
+    width: 90%;
+}
+
+.td-date {
+    font-size: .8rem;
+    font-style: italic;
+}
+
+input[type=checkbox] {
+    visibility:hidden;
+}
+
+.checkbox-wrapper {
+    border: 1px solid #fff;
+    border-radius: 25px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}

@@ -73,7 +73,9 @@ const Registration = ({ registrationForm, toggleForm }) => {
                     onChange={handleChange}
                     required
                 />
-                <button type="submit" className="btn">Register</button>
+                <div className="btn-container">
+                    <button type="submit" className="btn">Register</button>
+                </div>
                 <div>
                     {Object.values(errors).map((err, index) => (
                         <li key={index} className="error">{err}</li>
