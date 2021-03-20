@@ -11,6 +11,7 @@ const Form = ({ }) => {
     text: "",
     priority: 0,
     date_added: "",
+    link: "",
     tags: [],
     completed: false
   })
@@ -87,18 +88,36 @@ const Form = ({ }) => {
     <>
       <form onSubmit={handleSubmit}>
         <div className="form-row">
-          <input
-            type="text"
-            maxLength="255"
-            name="text"
-            id="text-input"
-            value={form.text}
-            onChange={handleChange}
-            required
-          />
+          <div className="form-col-8">
+            <input
+              type="text"
+              maxLength="255"
+              name="text"
+              id="text-input"
+              placeholder='Type your note here'
+              value={form.text}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="form-col-2">
+            <button type="submit" className="btn"></button>
+          </div>
         </div>
         <div className="form-row">
-          <div className="form-col">
+          <div className="form-col-6">
+            <input
+              type="text"
+              maxLength="255"
+              name="tags"
+              id="tags-input"
+              placeholder='Add a link to your note'
+              value={form.link}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="form-col-4">
             <input
               type="text"
               maxLength="255"
@@ -109,35 +128,6 @@ const Form = ({ }) => {
               onChange={handleChange}
               required
             />
-          </div>
-          <div className="form-col">
-            <input
-              type="radio"
-              name="priority"
-              value={form.priority}
-              onChange={handleChange}
-              required
-            />
-            <label htmlFor="priority" value="1">!</label>
-            <input
-              type="radio"
-              name="priority"
-              value={form.priority}
-              onChange={handleChange}
-              required
-            />
-            <label htmlFor="priority" value="2">!!</label>
-            <input
-              type="radio"
-              name="priority"
-              value={form.priority}
-              onChange={handleChange}
-              required
-            />
-            <label htmlFor="priority" value="3">!!!</label>
-          </div>
-          <div className="form-col">
-            <button type="submit" className="btn"></button>
           </div>
         </div>
       </form>

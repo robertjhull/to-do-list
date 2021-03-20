@@ -5,29 +5,37 @@ table {
 }
 
 tr {
-    height: 40px;
+    height: 50px;
     transition: box-shadow 400ms ease-in-out;
 }
 
 tr:hover {
     box-shadow: 1px 1px #22222280;
+}
+
+tr:hover .svg-delete {
+    fill: #ff0000;
     cursor: pointer;
 }
 
-.svg-link {
-    line-height: 40px;
+td {
+    padding: 0 10px;
+}
+
+.svg-link, .svg-delete {
+    line-height: 50px;
     vertical-align: middle;
     width:24px; 
     height:24px; 
+}
+
+.svg-delete {
+    fill:transparent;
+    transition: fill 400ms ease-in-out;
+}
+
+.svg-link {
     fill: #fff;
-}
-
-.td-completed, .td-priority, .td-date {
-    width: 3%;
-}
-
-.td-priority {
-    color:red;
 }
 
 .td-text {
@@ -35,7 +43,8 @@ tr:hover {
 }
 
 .td-date {
-    font-size: .8rem;
+    width: 3%;
+    font-size: .5rem;
     font-style: italic;
 }
 

@@ -8,12 +8,7 @@ form button,
 input {
   outline: none;
 }
-.form-col label {
-  line-height: 40px;
-  vertical-align: top;
-  color:#ff0000;
-  font-weight: 600;
-}
+
 input {
   border: 1px solid rgb(199, 199, 199);
   border-radius: 10px;
@@ -22,7 +17,7 @@ input {
 }
 
 input[type=radio] {
-  width: 20px;
+  width: 15px;
 }
 
 #text-input, #tags-input {
@@ -32,36 +27,49 @@ input[type=radio] {
 .form-row {
   display:flex;
   flex-direction: row;
+  justify-content: space-evenly;
   height: 40px;
   margin: 10px 0;
 }
 
 @media screen and (min-width: 601px) {
-  .form-col:nth-of-type(1) {
-    width: 70%;
+  .form-col-8 {
+    width: 80%;
   }
-  .form-col {
+  .form-col-6 {
+    width: 65%;
+  }
+  .form-col-4 {
+    width: 30%;
+  }
+  .form-col-2 {
     width: 15%;
   }
   label, input {
     font-size: 1.1rem;
   }
-  .form-col button::after {
+  .form-col-2 button::after {
     content: "+ New Note";
   }
 }
 
 @media screen and (max-width: 600px) {
-  .form-col:nth-of-type(1) {
+  .form-col-8 {
+    width: 70%;
+  }
+  .form-col-6 {
+    width: 60%;
+  }
+  .form-col-4 {
     width: 40%;
   }
-  .form-col {
+  .form-col-2 {
     width: 30%;
   }
   label, input {
     font-size: 0.9rem;
   }
-  .form-col button::after {
+  .form-col-2 button::after {
     content: "+ New";
   }
 }

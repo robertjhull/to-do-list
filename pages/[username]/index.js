@@ -88,9 +88,16 @@ const NotePage = () => {
     date_added: "3/18/21",
     link: "#"
   }
+
+  const sampleNote3 = {
+    text: "This is a much longer example note with medium priority. This is a much longer example note with medium priority. This is a much longer example note with medium priority.",
+    priority: 2,
+    date_added: "3/19/21",
+  }
+
   return (
     <>
-      <h2>[username]'s notes</h2>
+      <h1>{router.query.username}'s notes</h1>
       <Form />
       <table>
         <thead>
@@ -98,7 +105,16 @@ const NotePage = () => {
         <tbody>
           <Note content={sampleNote} />
           <Note content={sampleNote2} />
+          <Note content={sampleNote3} />
           <Note content={sampleNote} />
+          <Note content={sampleNote2} />
+          <Note content={sampleNote3} />
+          <Note content={sampleNote} />
+          <Note content={sampleNote2} />
+          <Note content={sampleNote3} />
+          <Note content={sampleNote} />
+          <Note content={sampleNote2} />
+          <Note content={sampleNote3} />
         </tbody>
       </table>
     </>
