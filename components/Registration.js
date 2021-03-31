@@ -1,6 +1,10 @@
 import { useState } from 'react'
+import { useRouter } from 'next/router'
 
 const Registration = ({ registrationForm, toggleForm }) => {
+    const router = useRouter()
+    const contentType = 'application/json'
+
     let [form, setForm] = useState({
         username: registrationForm.username,
         password: registrationForm.password,
@@ -23,9 +27,32 @@ const Registration = ({ registrationForm, toggleForm }) => {
         e.preventDefault()
         const errs = formValidate()
         if (Object.keys(errs).length === 0) {
-          console.log('validated!')
+          postData(form)
         } else {
           setErrors(errs)
+        }
+    }
+
+    const postData = async (form) => {
+        try {
+            const res = await fetch('/api/user', {
+                method: 'POST',
+                headers: {
+                    Accept: contentType,
+                    'Content-Type': contentType,
+                },
+                body: JSON.stringify(form),
+            })
+            // Throw error with status code in case Fetch API req failed
+            if (!res.ok) {
+                throw new Error(res.status)
+            }
+            router.push({
+                pathname: "/notes",
+                query: { username: form.username}
+            })
+        } catch (error) {
+            setErrors({error: error})
         }
     }
     
@@ -77,9 +104,9 @@ const Registration = ({ registrationForm, toggleForm }) => {
                     <button type="submit" className="btn">Register</button>
                 </div>
                 <div>
-                    {Object.values(errors).map((err, index) => (
+                    {/* {Object.values(errors).map((err, index) => (
                         <li key={index} className="error">{err}</li>
-                    ))}
+                    ))} */}
                 </div>
             </form>
         </>

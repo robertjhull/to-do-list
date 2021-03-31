@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useRouter } from 'next/router'
+import { useRouter, withRouter } from 'next/router'
 import Link from 'next/link'
 import dbConnect from '../../utils/dbConnect'
 import Form from '../../components/Form'
@@ -130,7 +130,7 @@ const NotePage = () => {
 //   return { props: { pet } }
 // }
 
-export default NotePage
+export default withRouter(NotePage);
 
 // change to notes for this page ->
 
