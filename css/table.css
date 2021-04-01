@@ -5,21 +5,18 @@ table {
 }
 
 tr {
-    height: 50px;
     transition: box-shadow 400ms ease-in-out;
+    height: 30px;
 }
 
 tr:hover {
     box-shadow: 1px 1px #22222280;
+    border-radius: 5px;
 }
 
 tr:hover .svg-delete {
     fill: #ff0000;
     cursor: pointer;
-}
-
-td {
-    padding: 0 10px;
 }
 
 .svg-link, .svg-delete {
@@ -31,21 +28,40 @@ td {
 
 .svg-delete {
     fill:transparent;
-    transition: fill 400ms ease-in-out;
+    position: relative;
+    transition: all 300ms ease-in-out;
+}
+
+.svg-delete:hover {
+    width: 30px;
+    height:30px;
 }
 
 .svg-link {
     fill: #fff;
 }
 
-.td-text {
+.td-date {
+    padding-right: 10px;
+    font-size: .5rem;
+    font-style: italic;
+    text-align: center;
+}
+
+.td-priority {
+    color:#ff0000;
+    width: 10px;
+    padding: 0 5px;
+}
+
+.td-content {
     width: 90%;
 }
 
-.td-date {
-    width: 3%;
-    font-size: .5rem;
-    font-style: italic;
+.td-delete {
+    width: 32px;
+    height: 32px;
+    text-align: center;
 }
 
 input[type=checkbox] {

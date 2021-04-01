@@ -1,15 +1,10 @@
-import { useState } from 'react'
 import { useRouter, withRouter } from 'next/router'
-import Link from 'next/link'
-import dbConnect from '../../utils/dbConnect'
 import Form from '../../components/Form'
 import Note from '../../components/Note'
 
 /* Allows you to view and edit your notes */
 const NotePage = () => {
   const router = useRouter()
-  const [message, setMessage] = useState('')
-
   // const handleDelete = async () => {
   //   const notesID = router.query.id
 
@@ -51,48 +46,12 @@ const NotePage = () => {
   //       setMessage('Failed to update pet')
   //     }
   //   }
-  
-  //   /* The POST method adds a new entry in the mongodb database. 
-  //   NEED TO UPDATE */
-  //   const postData = async (form) => {
-  //     try {
-  //       const res = await fetch('/api/pets', {
-  //         method: 'POST',
-  //         headers: {
-  //           Accept: contentType,
-  //           'Content-Type': contentType,
-  //         },
-  //         body: JSON.stringify(form),
-  //       })
-  
-  //       // Throw error with status code in case Fetch API req failed
-  //       if (!res.ok) {
-  //         throw new Error(res.status)
-  //       }
-  
-  //       router.push('/')
-  //     } catch (error) {
-  //       setMessage('Failed to add pet')
-  //     }
-  //   }
 
   const sampleNote = {
-    text: "This is an example note.",
-    priority: 1,
-    date_added: "3/18/21",
-  }
-
-  const sampleNote2 = {
-    text: "This is a longer example note with an added link and higher priority.",
-    priority: 3,
-    date_added: "3/18/21",
-    link: "#"
-  }
-
-  const sampleNote3 = {
-    text: "This is a much longer example note with medium priority. This is a much longer example note with medium priority. This is a much longer example note with medium priority.",
+    content: "This is a longer example note with an added link and higher priority.",
     priority: 2,
-    date_added: "3/19/21",
+    date_added: "3/18/21",
+    attachment: "#"
   }
 
   return (
@@ -103,40 +62,16 @@ const NotePage = () => {
         <thead>
         </thead>
         <tbody>
-          <Note content={sampleNote} />
-          <Note content={sampleNote2} />
-          <Note content={sampleNote3} />
-          <Note content={sampleNote} />
-          <Note content={sampleNote2} />
-          <Note content={sampleNote3} />
-          <Note content={sampleNote} />
-          <Note content={sampleNote2} />
-          <Note content={sampleNote3} />
-          <Note content={sampleNote} />
-          <Note content={sampleNote2} />
-          <Note content={sampleNote3} />
+          <Note note={sampleNote} />
         </tbody>
       </table>
     </>
   )
 }
 
-// export async function getServerSideProps({ params }) {
-//   await dbConnect()
-
-//   const notes = await Note.findById(params.id).lean()
-//   pet._id = pet._id.toString()
-
-//   return { props: { pet } }
-// }
-
 export default withRouter(NotePage);
 
 // change to notes for this page ->
-
-// import Link from 'next/link'
-// import dbConnect from '../utils/dbConnect'
-// import Pet from '../models/Note'
 
 // const Index = ({ pets }) => (
 //   <>
@@ -182,21 +117,6 @@ export default withRouter(NotePage);
 //     ))}
 //   </>
 // )
-
-// /* Retrieves pet(s) data from mongodb database */
-// export async function getServerSideProps() {
-//   await dbConnect()
-
-//   /* find all the data in our database */
-//   const result = await Pet.find({})
-//   const pets = result.map((doc) => {
-//     const pet = doc.toObject()
-//     pet._id = pet._id.toString()
-//     return pet
-//   })
-
-//   return { props: { pets: pets } }
-// }
 
 // export default Index
 

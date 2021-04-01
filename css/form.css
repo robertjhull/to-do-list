@@ -16,12 +16,77 @@ input {
   height: 100%;
 }
 
-input[type=radio] {
-  width: 15px;
+#content-input, #attachment-input {
+  width: 100%;
 }
 
-#text-input, #tags-input {
-  width: 100%;
+#priority-input {
+  --accent:#ff0000;
+  cursor: pointer;
+  background: transparent;
+  font-size: 90%;
+  transition: 0.5s all;
+  outline: none;
+}
+
+/* The container must be positioned relative: */
+.custom-select {
+  position: relative;
+  border-radius: 5px;
+  border: 1px solid #ff0000;
+  text-align: left;
+}
+
+.custom-select select {
+  display: none; /*hide original SELECT element: */
+}
+
+.select-selected {
+  background-color: transparent;
+}
+
+/* Style the arrow inside the select element: */
+.select-selected:after {
+  position: absolute;
+  content: "";
+  top: 14px;
+  right: 10px;
+  border: 6px solid transparent;
+  border-color: #fff transparent transparent transparent;
+}
+
+/* Point the arrow upwards when the select box is open (active): */
+.select-selected.select-arrow-active:after {
+  border-color: transparent transparent #fff transparent;
+  top: 10px;
+}
+
+/* style the items (options), including the selected item: */
+.select-items div,.select-selected {
+  color: #ffffff;
+  padding: 8px;
+  border: 1px solid transparent;
+  border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+  cursor: pointer;
+}
+
+/* Style items (options): */
+.select-items {
+  position: absolute;
+  background-color: transparent;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 99;
+}
+
+/* Hide the items when the select box is closed: */
+.select-hide {
+  display: none;
+}
+
+.select-items div:hover, .same-as-selected {
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 .form-row {
@@ -32,7 +97,7 @@ input[type=radio] {
   margin: 10px 0;
 }
 
-@media screen and (min-width: 601px) {
+@media screen and (min-width: 901px) {
   .form-col-8 {
     width: 80%;
   }
@@ -45,17 +110,18 @@ input[type=radio] {
   .form-col-2 {
     width: 15%;
   }
+  .form-col-1 {
+    margin: 0 2.5%;
+    width: 10%;
+  }
   label, input {
     font-size: 1.1rem;
   }
-  .form-col-2 button::after {
-    content: "+ New Note";
-  }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 900px) {
   .form-col-8 {
-    width: 70%;
+    width: 65%;
   }
   .form-col-6 {
     width: 60%;
@@ -64,12 +130,13 @@ input[type=radio] {
     width: 40%;
   }
   .form-col-2 {
-    width: 30%;
+    width: 35%;
+  }
+  .form-col-1 {
+    margin: 0 5%;
+    width: 25%;
   }
   label, input {
     font-size: 0.9rem;
-  }
-  .form-col-2 button::after {
-    content: "+ New";
   }
 }
