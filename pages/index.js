@@ -7,7 +7,7 @@ const Index = () => {
   const router = useRouter()
   const contentType = 'application/json'
 
-  let [registered, setRegistered] = useState(false)
+  let [registered, setRegistered] = useState(true)
 
   const registrationForm = {
     username: '',

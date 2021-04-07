@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const Note = new Schema({
   user_id: {
     /* The owner of the note */
-    type: Number,
+    type: String,
     required: [true],
   },
   content: {

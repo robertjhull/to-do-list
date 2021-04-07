@@ -2,7 +2,7 @@ const User = require('../models/User')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 
-const register = (req) => {
+const register = (req, res, next) => {
 
     const addNewUser = (hashedPassword) => {
         let user = new User({
@@ -30,7 +30,7 @@ const register = (req) => {
     })
 }
 
-const login = (req) => {
+const login = (req, res) => {
     User.findOne({
         username: { $eq: req.username }
     })
@@ -43,16 +43,17 @@ const login = (req) => {
                     })
                 }
                 if (result) {
-                    let token = jwt.sign(
-                        {username: user.username}, 
-                        'verySecretValue',
-                        {expiresIn: '1hr'}
-                    )
+                    jwt.sign({user_id: user._id}, 'privatekey', { expiresIn: '1h' },(err, token) => {
+                        if(err) { console.log(err) }
+                        user.token = token
+                        res.send(user.token)
+                    });
                     console.log("login successful")
                 } else {
                     console.log("something went wrong")
                 }
             })
+            return user;
         } else {
             console.log("no user found")
         }

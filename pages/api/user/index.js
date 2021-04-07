@@ -1,7 +1,7 @@
 import AuthController from '../../../controllers/AuthController';
 import dbConnect from '../../../utils/dbConnect';
 
-export default async function handler(req, res) {
+export default async function handler(req, res, next) {
 
     const { method } = req
 
@@ -12,16 +12,15 @@ export default async function handler(req, res) {
             break;
         case 'POST':
             try {
-                let user;
-                if (req.body.confirm_password) user = AuthController.register(req.body)
-                else user = AuthController.login(req.body)
-                res.status(201).json({ success: true, data: user })
+                if (req.body.confirm_password) AuthController.register(req.body, res)
+                else AuthController.login(req.body, res)
+                res.status(201).json({ success: true })
             } catch (error) {
-                res.status(400).json({ success: false })
+                // res.status(400).json({ success: false })
             }
             break;
         default:
-            res.status(400).json({ success: false })
+            // res.status(400).json({ success: false })
             break;
     }
 }

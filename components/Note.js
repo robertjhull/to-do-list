@@ -2,7 +2,6 @@ export default function Note({ note }) {
     const priority = "!".repeat(note.priority);
     return (
         <tr>
-            <td className="td-date">{note.date_added}</td>
             <td className="td-priority">{ priority }</td>
             <td className="td-content">
                 {note.content}{' '}
@@ -12,6 +11,7 @@ export default function Note({ note }) {
                     <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 0 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 0 0-4.243-4.243L6.586 4.672z"/></svg>
                 }
             </td>
+            <td className="td-date">{note.date_added}</td>
             <td className="td-delete">
                 <svg xmlns="http://www.w3.org/2000/svg" className="svg-delete" viewBox="0 0 16 16"><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/></svg>
             </td>

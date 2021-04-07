@@ -9,11 +9,11 @@ const Form = ({ }) => {
   
   const [message, setMessage] = useState('')
   const [form, setForm] = useState({
-    user_id: NaN,
+    user_id: "6063f28382542401141f1a2e",
     content: "",
     attachment: "",
     priority: 0,
-    date_added: "",
+    date_added: "4/6/21",
     finished: false
   })
 
@@ -52,7 +52,7 @@ const Form = ({ }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    forNewPet ? postData(form) : putData(form)
+    postData(form)
   }
 
   useEffect(() => {
@@ -76,7 +76,7 @@ const Form = ({ }) => {
             />
           </div>
           <div className="form-col-2">
-            <button type="submit" className="btn">+ New</button>
+            <button type="submit" className="btn">+ New Note</button>
           </div>
         </div>
         <div className="form-row">
