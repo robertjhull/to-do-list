@@ -27,7 +27,7 @@ const Index = () => {
 
   const postData = async (form) => {
     try {
-        const res = await fetch('/api/user', {
+        const res = await fetch('/api/user/login', {
             method: 'POST',
             headers: {
                 Accept: contentType,
@@ -38,11 +38,13 @@ const Index = () => {
         // Throw error with status code in case Fetch API req failed
         if (!res.ok) {
             throw new Error(res.status)
-        }
-        router.push({
+        } else {
+          console.log("this should be res", res)
+          router.push({
             pathname: "/notes",
             query: { username: form.username}
-        })
+        }, "/notes")
+        }
     } catch (error) {
         console.log(error)
     }

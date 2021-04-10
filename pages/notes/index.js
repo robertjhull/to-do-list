@@ -1,10 +1,14 @@
 import { useRouter, withRouter } from 'next/router'
+import { useEffect, useState } from 'react'
 import Form from '../../components/Form'
 import Note from '../../components/Note'
 
 /* Allows you to view and edit your notes */
 const NotePage = () => {
   const router = useRouter()
+  const contentType = 'application/json'
+
+  let [loaded, setLoaded] = useState(false);
   // const handleDelete = async () => {
   //   const notesID = router.query.id
 
@@ -53,6 +57,25 @@ const NotePage = () => {
     date_added: "3/18/21",
     attachment: "#"
   }
+  const getUserNotes = async () => {
+    const res = await fetch('/api/notes/6063f28382542401141f1a2e', {
+      method: 'GET',
+      headers: {
+        Accept: contentType,
+        'Content-Type': contentType,
+      }
+    }).then(function(response) { console.log("2", response.json()) })
+    .catch(err => {
+      console.log(err)
+    })
+  }
+
+  useEffect(() => {
+    console.log("fetching notes")
+    let notes = getUserNotes()
+    setLoaded(true)
+    console.log(notes)
+  }, [loaded])
 
   return (
     <>
@@ -62,7 +85,9 @@ const NotePage = () => {
         <thead>
         </thead>
         <tbody>
-          <Note note={sampleNote} />
+            {/* {loaded && notes.map((note, key) => {
+            <Note note={note} />
+            })} */}
         </tbody>
       </table>
     </>
