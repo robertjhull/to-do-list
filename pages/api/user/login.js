@@ -9,7 +9,7 @@ export default async function handler(req, res) {
     const { method } = req
 
     await dbConnect()
-  
+
     if (method === 'POST') {
         try {
             await User.findOne({

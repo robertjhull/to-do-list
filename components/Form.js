@@ -3,13 +3,13 @@ import { useRouter } from 'next/router'
 import { mutate } from 'swr'
 import customSelect from '../utils/customSelect';
 
-const Form = ({ }) => {
+const Form = (props) => {
   const router = useRouter()
   const contentType = 'application/json'
-  
+  const { user_id, refresh } = props;
   const [message, setMessage] = useState('')
   const [form, setForm] = useState({
-    user_id: "6063f28382542401141f1a2e",
+    user_id: user_id,
     content: "",
     attachment: "",
     priority: 0,
@@ -33,6 +33,8 @@ const Form = ({ }) => {
       if (!res.ok) {
         throw new Error(res.status)
       }
+      setMessage('Note added successfully')
+      refresh()
     } catch (error) {
       setMessage('Failed to add note')
     }
@@ -47,11 +49,19 @@ const Form = ({ }) => {
       ...form,
       [name]: value,
     })
-    console.log(form)
+  }
+
+  const handleDate = () => {
+    let currDate = new Date()
+    setForm({
+      ...form,
+      date_added: `${currDate.getMonth() + 1}/${currDate.getDate()}/${currDate.getFullYear()}`
+    })
   }
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    handleDate()
     postData(form)
   }
 
@@ -89,7 +99,6 @@ const Form = ({ }) => {
               placeholder='(optional) add a link to your note'
               value={form.attachment}
               onChange={handleChange}
-              required
             />
           </div>
           <div className="form-col-1 custom-select">

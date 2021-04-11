@@ -35,18 +35,18 @@ const Index = () => {
             },
             body: JSON.stringify(form),
         })
-        // Throw error with status code in case Fetch API req failed
-        if (!res.ok) {
-            throw new Error(res.status)
-        } else {
-          console.log("this should be res", res)
-          router.push({
-            pathname: "/notes",
-            query: { username: form.username}
-        }, "/notes")
-        }
-    } catch (error) {
-        console.log(error)
+        .then(res => { return res.json() })
+        .then(res => {
+            router.push({
+              pathname: "/notes",
+              query: {
+                username: res.username,
+                id: res._id
+              }
+          }, "/notes")
+        })
+    } catch(err) {
+      console.log(err)
     }
   }
 

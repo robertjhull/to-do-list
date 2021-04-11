@@ -30,7 +30,7 @@ export default async function handler(req, res) {
             })
             res.status(201).json({ success: true, data: notes })
           } catch (error) {
-              res.status(400).json({ success: false })
+            res.status(400).json({ success: false })
           }
           break;
       case 'POST':
@@ -52,7 +52,7 @@ export default async function handler(req, res) {
             })
             res.status(201).json({ success: true, data: note })
           } catch (error) {
-              res.status(400).json({ success: false })
+            res.status(400).json({ success: false })
           }
           break;
       default:

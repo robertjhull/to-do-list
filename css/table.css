@@ -19,11 +19,23 @@ tr:hover .svg-delete {
     cursor: pointer;
 }
 
+td a {
+    text-decoration: none;
+    color: inherit;
+    transition: color 300ms ease-in-out;
+}
+
+td a:hover, td a:hover .svg-link {
+    color:#0dac4f;
+    fill: #0dac4f;
+}
+
 .svg-link, .svg-delete {
     line-height: 50px;
     vertical-align: middle;
     width:24px; 
     height:24px; 
+    transition: all 300ms ease-in-out;
 }
 
 .svg-delete {

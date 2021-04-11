@@ -6,65 +6,26 @@ import Note from '../../components/Note'
 /* Allows you to view and edit your notes */
 const NotePage = () => {
   const router = useRouter()
+  const { username, id } = router.query;
   const contentType = 'application/json'
 
-  let [loaded, setLoaded] = useState(false);
-  // const handleDelete = async () => {
-  //   const notesID = router.query.id
+  let [userNotes, setUserNotes] = useState([]);
 
-  //   try {
-  //     await fetch(`/api/notes/${notesID}`, {
-  //       method: 'Delete',
-  //     })
-  //     router.push('/')
-  //   } catch (error) {
-  //     setMessage('Failed to delete the pet.')
-  //   }
-  // }
-
-  //   /* The PUT method edits an existing entry in the mongodb database.
-  //   NEED TO UPDATE */
-  //   const putData = async (form) => {
-  //     const { id } = router.query
-  
-  //     try {
-  //       const res = await fetch(`/api/notes/${id}`, {
-  //         method: 'PUT',
-  //         headers: {
-  //           Accept: contentType,
-  //           'Content-Type': contentType,
-  //         },
-  //         body: JSON.stringify(form),
-  //       })
-  
-  //       // Throw error with status code in case Fetch API req failed
-  //       if (!res.ok) {
-  //         throw new Error(res.status)
-  //       }
-  
-  //       const { data } = await res.json()
-  
-  //       mutate(`/api/pets/${id}`, data, false) // Update the local data without a revalidation
-  //       router.push('/')
-  //     } catch (error) {
-  //       setMessage('Failed to update pet')
-  //     }
-  //   }
-
-  const sampleNote = {
-    content: "This is a longer example note with an added link and higher priority.",
-    priority: 2,
-    date_added: "3/18/21",
-    attachment: "#"
-  }
   const getUserNotes = async () => {
-    const res = await fetch('/api/notes/6063f28382542401141f1a2e', {
+    const res = await fetch(`/api/notes/${ id }`, {
       method: 'GET',
       headers: {
         Accept: contentType,
         'Content-Type': contentType,
       }
-    }).then(function(response) { console.log("2", response.json()) })
+    }).then(res => {
+      return res.json();
+    })
+    .then(notes => {
+      console.log(":30", notes.data)
+      setUserNotes([...notes.data])
+      console.log(":34", userNotes)
+    })
     .catch(err => {
       console.log(err)
     })
@@ -73,21 +34,26 @@ const NotePage = () => {
   useEffect(() => {
     console.log("fetching notes")
     let notes = getUserNotes()
-    setLoaded(true)
-    console.log(notes)
-  }, [loaded])
+  }, [])
 
   return (
     <>
-      <h1>{router.query.username}'s notes</h1>
-      <Form />
+      <h1>{ username }'s notes</h1>
+      <Form user_id={ id } refresh={ getUserNotes } />
       <table>
         <thead>
         </thead>
         <tbody>
-            {/* {loaded && notes.map((note, key) => {
-            <Note note={note} />
-            })} */}
+            {userNotes.length && userNotes.map((note, key) => {
+              return(<Note 
+                id={note._id}
+                priority={note.priority}
+                content={note.content}
+                attachment={note.attachment}
+                date_added={note.date_added}
+                key={key}
+              />)
+            })}
         </tbody>
       </table>
     </>
