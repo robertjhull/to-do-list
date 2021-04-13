@@ -76,10 +76,6 @@ td a:hover, td a:hover .svg-link {
     text-align: center;
 }
 
-input[type=checkbox] {
-    visibility:hidden;
-}
-
 .checkbox-wrapper {
     border: 1px solid #fff;
     border-radius: 25px;

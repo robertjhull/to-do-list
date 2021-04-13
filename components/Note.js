@@ -1,10 +1,36 @@
 import react from 'react'
 
 export default function Note(props) {
-    const { id, priority, content, attachment, date_added } = props;
+    const contentType = 'application/json'
+    const { id, priority, content, attachment, date_added, refresh } = props;
     const priorityMark = "!".repeat(priority);
+
+    const deleteNote = async() => {
+        const res = await fetch('/api/notes', {
+            method: 'DELETE',
+            headers: {
+                Accept: contentType,
+                'Content-Type': contentType,
+            },
+            body: JSON.stringify(id)
+        }).then(res => {
+            console.log(res)
+            refresh()
+        }).catch(err => {
+            console.log(err)
+        })
+    }
+
     return (
         <tr>
+            <td className="td-finished">
+                <input 
+                    type="checkbox"
+                    id="finished-input"
+                    name="finished" 
+                    value="true"
+                ></input>
+            </td>
             <td className="td-priority">{ priorityMark }</td>
             <td className="td-content">
                 {attachment ?
@@ -16,7 +42,7 @@ export default function Note(props) {
             </td>
             <td className="td-date">{date_added}</td>
             <td className="td-delete">
-                <svg xmlns="http://www.w3.org/2000/svg" className="svg-delete" viewBox="0 0 16 16"><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" className="svg-delete" viewBox="0 0 16 16" onClick={ deleteNote }><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/></svg>
             </td>
         </tr>
     )

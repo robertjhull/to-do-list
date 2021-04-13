@@ -22,9 +22,7 @@ const NotePage = () => {
       return res.json();
     })
     .then(notes => {
-      console.log(":30", notes.data)
       setUserNotes([...notes.data])
-      console.log(":34", userNotes)
     })
     .catch(err => {
       console.log(err)
@@ -45,14 +43,16 @@ const NotePage = () => {
         </thead>
         <tbody>
             {userNotes.length && userNotes.map((note, key) => {
-              return(<Note 
-                id={note._id}
-                priority={note.priority}
-                content={note.content}
-                attachment={note.attachment}
-                date_added={note.date_added}
-                key={key}
-              />)
+              return(<div key={key}>
+                <Note 
+                  id={note._id}
+                  priority={note.priority}
+                  content={note.content}
+                  attachment={note.attachment}
+                  date_added={note.date_added}
+                  refresh={ getUserNotes }
+                />
+              </div>)
             })}
         </tbody>
       </table>

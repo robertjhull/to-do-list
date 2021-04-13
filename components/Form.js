@@ -57,6 +57,7 @@ const Form = (props) => {
       ...form,
       date_added: `${currDate.getMonth() + 1}/${currDate.getDate()}/${currDate.getFullYear()}`
     })
+    console.log(form.date_added)
   }
 
   const handleSubmit = (e) => {
@@ -64,10 +65,6 @@ const Form = (props) => {
     handleDate()
     postData(form)
   }
-
-  useEffect(() => {
-    customSelect();
-  }, [])
 
   return (
     <>

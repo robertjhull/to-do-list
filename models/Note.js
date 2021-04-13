@@ -26,7 +26,7 @@ const Note = new Schema({
   },
   date_added: {
     required: [true],
-    type: Date
+    type: String
   },
   finished: {
     type: Boolean

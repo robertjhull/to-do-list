@@ -1,14 +1,5 @@
 import dbConnect from '../../../utils/dbConnect'
-const User = require('../../../models/User')
 const Note = require('../../../models/Note')
-
-const _update = (req) => {
-    console.log(req)
-}
-
-const _delete = (req) => {
-    console.log(req)
-}
 
 export default async function handler(req, res) {
   
@@ -17,23 +8,7 @@ export default async function handler(req, res) {
   await dbConnect()
 
   switch (method) {
-      case 'GET':
-          try {
-            const notes = Note.find({
-                user_id : { $eq: req.body.user_id }
-            }, function(err, notes) {
-                if (err) {
-                    console.log(err)
-                } else {
-                    console.log(notes)
-                }
-            })
-            res.status(201).json({ success: true, data: notes })
-          } catch (error) {
-            res.status(400).json({ success: false })
-          }
-          break;
-      case 'POST':
+      case 'POST': // Add a new note to the db
           try {
             let note = new Note({
                 user_id: req.body.user_id,
@@ -55,6 +30,19 @@ export default async function handler(req, res) {
             res.status(400).json({ success: false })
           }
           break;
+      case 'DELETE': /* Delete a note by its ID */
+          console.log(req.body)
+          try {
+            const deletedNote = await Note.deleteOne({ _id: req.body })
+            if (!deletedNote) {
+                return res.status(400).json({ success: false })
+            }
+            console.log("Successfully deleted note!")
+            res.status(200).json({ success: true, data: {} })
+          } catch (error) {
+            res.status(400).json({ success: false })
+          }
+          break
       default:
           res.status(400).json({ success: false })
           break;
