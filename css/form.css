@@ -9,7 +9,7 @@ input[type="text"], input[type="password"] {
 }
 
 input[type="text"], input[type="password"] {
-  border: 1px solid rgb(199, 199, 199);
+  border: 1px solid #c7c7c7;
   border-radius: 10px;
   color: rgb(53, 53, 53);
   height: 100%;
@@ -25,14 +25,14 @@ input[type="text"], input[type="password"] {
 }
 
 #priority-input {
-  --accent:#ff0000;
+  --accent:#c7c7c7;
   cursor: pointer;
   background: transparent;
   font-size: 90%;
   transition: 0.5s all;
   outline: none;
   color: var(--accent);
-  border: 2px solid var(--accent);
+  border: 1px solid var(--accent);
   padding: 9px 15px;
   border-radius: 10px;
 }

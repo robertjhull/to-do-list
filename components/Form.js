@@ -6,7 +6,7 @@ const Form = (props) => {
   const contentType = 'application/json'
   const { user_id, refresh } = props;
   const [message, setMessage] = useState('')
-  const [form, setForm] = useState({
+  const [form, setForm, getForm] = useState({
     user_id: user_id,
     content: "",
     attachment: "",
@@ -14,8 +14,6 @@ const Form = (props) => {
     priority: 0,
     date_added: "",
     finished: false
-  }, function() {
-    return true;
   })
 
   const clearForm = () => {
@@ -65,23 +63,26 @@ const Form = (props) => {
     })
   }
 
-  const handleDate = async () => {
+  const handleDate = () => {
     const currDate = new Date()
     const month = currDate.getMonth() + 1
     const day = currDate.getDate()
     const year = currDate.getFullYear()
-    const date = `${month}/${day}/${year}`
+    const parsedDate = `${month}/${day}/${year}`
     setForm({
       ...form,
-      date_added: date,
+      date_added: parsedDate,
     })
   }
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    let ready = handleDate()
-    if (ready) postData(form)
+    postData(form)
   }
+
+  useEffect(() => {
+    handleDate()
+  }, [])
 
   return (
     <>
