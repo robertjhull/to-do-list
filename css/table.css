@@ -1,5 +1,5 @@
 table {
-    margin: 0 auto;
+    margin: 0 auto 5% auto;
     text-align: left;
     border-collapse: collapse;
     /* background-color: white;
@@ -92,7 +92,6 @@ td a:hover, td a:hover .svg-link {
 }
 
 .td-date {
-    padding-right: 10px;
     font-size: .5rem;
     font-style: italic;
     text-align: right;
@@ -102,6 +101,15 @@ td a:hover, td a:hover .svg-link {
     color:#ff0000;
     width: 10px;
     padding: 0 5px;
+}
+
+.td-heading {
+    padding: 0 5px;
+    margin: 0;
+    font-size: .6rem;
+    text-align: center;
+    max-width: 120px;
+    font-weight: bold;
 }
 
 .td-content {

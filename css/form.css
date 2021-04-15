@@ -20,7 +20,7 @@ input[type="text"], input[type="password"] {
   width: 90%;
 }
 
-#content-input, #attachment-input {
+#content-input, #attachment-input, #heading-input {
   width: 100%;
 }
 
@@ -33,7 +33,7 @@ input[type="text"], input[type="password"] {
   outline: none;
   color: var(--accent);
   border: 2px solid var(--accent);
-  padding: 10px 15px;
+  padding: 9px 15px;
   border-radius: 10px;
 }
 
@@ -83,19 +83,22 @@ select option {
     width: 90%;
   }
   .form-col-8 {
+    margin: 0 1%;
     width: 65%;
   }
   .form-col-6 {
+    margin: 0 1%;
     width: 60%;
   }
   .form-col-4 {
     width: 40%;
   }
   .form-col-2 {
+    margin: 0 1%;
     width: 35%;
   }
   .form-col-1 {
-    margin: 0 5%;
+    margin: 0 1%;
     width: 25%;
   }
   label, input {

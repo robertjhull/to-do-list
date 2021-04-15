@@ -19,7 +19,7 @@ export default async function handler(req, res) {
         case 'Date':
             notes = await Note.find({ user_id : { $eq: id }}).sort({
                 finished: false,
-                date_added: +1 
+                date_added: -1 
             })
             break;
         case 'Priority':
@@ -31,7 +31,7 @@ export default async function handler(req, res) {
         case 'Heading':
             notes = await Note.find({ user_id : { $eq: id }}).sort({
                 finished: false,
-                heading: +1 
+                heading: -1 
             })
             break;
         default:

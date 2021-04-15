@@ -10,9 +10,12 @@ const Form = (props) => {
     user_id: user_id,
     content: "",
     attachment: "",
+    heading: "",
     priority: 0,
     date_added: "",
     finished: false
+  }, function() {
+    return true;
   })
 
   const clearForm = () => {
@@ -20,6 +23,7 @@ const Form = (props) => {
       ...form,
       content: "",
       attachment: "",
+      heading: "",
       priority: 0
     })
   }
@@ -61,24 +65,22 @@ const Form = (props) => {
     })
   }
 
-  const handleDate = () => {
+  const handleDate = async () => {
     const currDate = new Date()
     const month = currDate.getMonth() + 1
     const day = currDate.getDate()
     const year = currDate.getFullYear()
     const date = `${month}/${day}/${year}`
-    console.log(date)
     setForm({
       ...form,
       date_added: date,
     })
-    console.log(form)
   }
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    handleDate()
-    postData(form)
+    let ready = handleDate()
+    if (ready) postData(form)
   }
 
   return (
@@ -103,7 +105,7 @@ const Form = (props) => {
           </div>
         </div>
         <div className="form-row">
-          <div className="form-col-8">
+          <div className="form-col-6">
             <input
               type="text"
               maxLength="255"
@@ -115,7 +117,19 @@ const Form = (props) => {
               autoComplete="off"
             />
           </div>
-          <div className="form-col-1 custom-select">
+          <div className="form-col-2">
+            <input
+              type="text"
+              maxLength="20"
+              name="heading"
+              id="heading-input"
+              placeholder='(opt) Heading'
+              value={form.heading}
+              onChange={handleChange}
+              autoComplete="on"
+            />
+          </div>
+          <div className="form-col-1">
             <select
               name="priority"
               id="priority-input"

@@ -121,6 +121,7 @@ const NotePage = ({data}) => {
                   id={note._id}
                   finished={note.finished}
                   priority={note.priority}
+                  heading={note.heading}
                   content={note.content}
                   attachment={note.attachment}
                   date_added={note.date_added}

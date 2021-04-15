@@ -14,6 +14,7 @@ export default async function handler(req, res) {
                 user_id: req.body.user_id,
                 content: req.body.content,
                 attachment: req.body.attachment,
+                heading: req.body.heading,
                 priority: req.body.priority,
                 date_added: req.body.date_added,
                 finished: req.body.finished
