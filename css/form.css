@@ -1,5 +1,4 @@
 form {
-  width: 80%;
   margin: auto;
   display:flex;
   flex-direction: column;
@@ -55,6 +54,9 @@ select option {
 }
 
 @media screen and (min-width: 901px) {
+  form {
+    width: 80%;
+  }
   .form-col-8 {
     width: 80%;
   }
@@ -77,6 +79,9 @@ select option {
 }
 
 @media screen and (max-width: 900px) {
+  form {
+    width: 90%;
+  }
   .form-col-8 {
     width: 65%;
   }

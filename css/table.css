@@ -1,10 +1,21 @@
 table {
-    width: 75%;
     margin: 5% auto;
     text-align: left;
     border-collapse: collapse;
     /* background-color: white;
     border-radius: 5px 5px 0 0; */
+}
+
+@media screen and (min-width: 901px) {
+    table {
+        width: 75%;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    table {
+        width: 90%;
+    }
 }
 
 tr {
