@@ -1,3 +1,4 @@
+import { CookiesProvider } from 'react-cookie'
 import '../css/style.css'
 import '../css/form.css'
 import '../css/table.css'
@@ -10,13 +11,10 @@ function MyApp({ Component, pageProps }) {
       <Head>
         <title>Notes</title>
       </Head>
-
-      <div className="top-bar">
-        <div className="nav">
-        </div>
-      </div>
       <div className="grid wrapper">
-        <Component {...pageProps} />
+        <CookiesProvider>
+          <Component {...pageProps} />
+        </CookiesProvider>
       </div>
     </>
   )

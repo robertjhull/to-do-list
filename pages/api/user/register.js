@@ -13,7 +13,7 @@ const register = (req, res) => {
         user.save()
         .then(user => {
             console.log("Successfully added user!")
-            res.status(201).json({ success: true, data: user })
+            res.json({success: true, username: user.username, id: user._id})
         })
         .catch(error => {
             console.log(error)
@@ -39,9 +39,10 @@ export default async function handler(req, res) {
     await dbConnect()
   
     if (method === 'POST') {
-    try {
-        register(req.body, res)
-    } catch (error) {
-        res.status(400).json({ success: false })
+        try {
+            register(req.body, res)
+        } catch (error) {
+            res.status(400).json({ success: false })
+        }
     }
 }

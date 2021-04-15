@@ -1,12 +1,15 @@
 import { useRouter, withRouter } from 'next/router'
 import { useEffect, useState } from 'react'
+import { parseCookies } from '../../utils/cookies';
 import Form from '../../components/Form'
 import Note from '../../components/Note'
+import Navbar from '../../components/Nav'
 
 /* Allows you to view and edit your notes */
-const NotePage = () => {
+const NotePage = ({data}) => {
   const router = useRouter()
-  const { username, id } = router.query;
+  let { username, id } = JSON.parse(data.user);
+
   const contentType = 'application/json'
 
   let [userNotes, setUserNotes] = useState([]);
@@ -29,30 +32,70 @@ const NotePage = () => {
     })
   }
 
+  getUserNotes();
+
+  const updateNote = async(note_id, finished) => {
+    const res = await fetch(`/api/notes/${ note_id }`, {
+        method: 'PUT',
+        headers: {
+            Accept: contentType,
+            'Content-Type': contentType,
+        },
+        body: JSON.stringify(!finished)
+    }).then(res => {
+        getUserNotes()
+    }).catch(err => {
+        console.log(err)
+    })
+  }
+
+  const deleteNote = async(note_id) => {
+    const res = await fetch('/api/notes', {
+        method: 'DELETE',
+        headers: {
+            Accept: contentType,
+            'Content-Type': contentType,
+        },
+        body: JSON.stringify(note_id)
+    }).then(res => {
+        getUserNotes()
+    }).catch(err => {
+        console.log(err)
+    })
+  }
+
   useEffect(() => {
-    console.log("fetching notes")
-    let notes = getUserNotes()
-  }, [])
+    setTimeout(function() {
+      let checkboxes = document.getElementsByClassName("finished-input")
+      for (let checkbox of checkboxes) {
+        if (checkbox.value == "true") checkbox.checked = true;
+        else checkbox.checked = false;
+      }
+    }, 3000)
+  }, [userNotes])
 
   return (
     <>
+      <Navbar />
       <h1>{ username }'s notes</h1>
       <Form user_id={ id } refresh={ getUserNotes } />
       <table>
         <thead>
         </thead>
         <tbody>
-            {userNotes.length && userNotes.map((note, key) => {
-              return(<div key={key}>
+            {userNotes.length > 0 && userNotes.map((note, key) => {
+              return(
                 <Note 
+                  key={key}
                   id={note._id}
+                  finished={note.finished}
                   priority={note.priority}
                   content={note.content}
                   attachment={note.attachment}
                   date_added={note.date_added}
-                  refresh={ getUserNotes }
-                />
-              </div>)
+                  updateNote={ updateNote }
+                  deleteNote={ deleteNote }
+                />)
             })}
         </tbody>
       </table>
@@ -60,54 +103,18 @@ const NotePage = () => {
   )
 }
 
+NotePage.getInitialProps = async ({ req, res }) => {
+  const data = parseCookies(req)
+  
+  if (res) {
+    if (Object.keys(data).length === 0 && data.constructor === Object) {
+      res.writeHead(301, { Location: "/" })
+      res.end()
+    }
+  }
+  return {
+    data: data && data,
+  }
+}
+
 export default withRouter(NotePage);
-
-// change to notes for this page ->
-
-// const Index = ({ pets }) => (
-//   <>
-//     {/* Create a card for each pet */}
-//     {pets.map((pet) => (
-//       <div key={pet._id}>
-//         <div className="card">
-//           <img src={pet.image_url} />
-//           <h5 className="pet-name">{pet.name}</h5>
-//           <div className="main-content">
-//             <p className="pet-name">{pet.name}</p>
-//             <p className="owner">Owner: {pet.owner_name}</p>
-
-//             {/* Extra Pet Info: Likes and Dislikes */}
-//             <div className="likes info">
-//               <p className="label">Likes</p>
-//               <ul>
-//                 {pet.likes.map((data, index) => (
-//                   <li key={index}>{data} </li>
-//                 ))}
-//               </ul>
-//             </div>
-//             <div className="dislikes info">
-//               <p className="label">Dislikes</p>
-//               <ul>
-//                 {pet.dislikes.map((data, index) => (
-//                   <li key={index}>{data} </li>
-//                 ))}
-//               </ul>
-//             </div>
-
-//             <div className="btn-container">
-//               <Link href="/[id]/edit" as={`/${pet._id}/edit`}>
-//                 <button className="btn edit">Edit</button>
-//               </Link>
-//               <Link href="/[id]" as={`/${pet._id}`}>
-//                 <button className="btn view">View</button>
-//               </Link>
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-//     ))}
-//   </>
-// )
-
-// export default Index
-

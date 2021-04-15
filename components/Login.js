@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-const Login = ({ loginForm, toggleForm, loginHandler }) => {
+const Login = ({ loginForm, toggleForm, loginHandler, message }) => {
 
     let [form, setForm] = useState({
         username: loginForm.username,
@@ -65,6 +65,7 @@ const Login = ({ loginForm, toggleForm, loginHandler }) => {
                         <li key={index} className="error">{err}</li>
                     ))}
                 </div>
+                <span className="error">{message}</span>
                 <div className="btn-container">
                     <button type="submit" className="btn">Sign In</button>
                 </div>

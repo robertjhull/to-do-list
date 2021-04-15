@@ -31,7 +31,6 @@ export default async function handler(req, res) {
           }
           break;
       case 'DELETE': /* Delete a note by its ID */
-          console.log(req.body)
           try {
             const deletedNote = await Note.deleteOne({ _id: req.body })
             if (!deletedNote) {

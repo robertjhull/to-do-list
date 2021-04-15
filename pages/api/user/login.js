@@ -20,14 +20,16 @@ export default async function handler(req, res) {
                     bcrypt.compare(req.body.password, user.password, function(err, result) {
                         if (err) { res.json({ error: err }) }
                         else if (result) {
-                            console.log("successfully logged in", user._id)
-                            res.json(user) // this appears to do nothing?
-                            console.log("sent response")
+                            console.log("Successfully logged in ", user._id)
+                            res.json({success: true, username: user.username, id: user._id})
                         }
-                        else { console.log("Something went wrong") }
+                        else {
+                            res.status(400).json({ success: false })
+                        }
                     })
                 } else {
                     console.log("No user found")
+                    res.status(400).json({ success: false })
                 }
             })
         } catch (error) {

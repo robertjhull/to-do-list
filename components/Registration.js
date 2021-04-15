@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/router'
 
-const Registration = ({ registrationForm, toggleForm, registrationHandler }) => {
+const Registration = ({ registrationForm, toggleForm, registrationHandler, message }) => {
 
     let [form, setForm] = useState({
         username: registrationForm.username,
@@ -80,6 +80,7 @@ const Registration = ({ registrationForm, toggleForm, registrationHandler }) => 
                         <li key={index} className="error">{err}</li>
                     ))}
                 </div>
+                <span className="error">{message}</span>
                 <div className="btn-container">
                     <button type="submit" className="btn">Register</button>
                 </div>

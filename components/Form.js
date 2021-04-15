@@ -1,7 +1,5 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { mutate } from 'swr'
-import customSelect from '../utils/customSelect';
 
 const Form = (props) => {
   const router = useRouter()
@@ -13,9 +11,18 @@ const Form = (props) => {
     content: "",
     attachment: "",
     priority: 0,
-    date_added: "4/6/21",
+    date_added: "",
     finished: false
   })
+
+  const clearForm = () => {
+    setForm({
+      ...form,
+      content: "",
+      attachment: "",
+      priority: 0
+    })
+  }
 
   /* The POST method adds a new entry in the mongodb database. */
   const postData = async (form) => {
@@ -33,8 +40,11 @@ const Form = (props) => {
       if (!res.ok) {
         throw new Error(res.status)
       }
-      setMessage('Note added successfully')
-      refresh()
+      else { 
+        setMessage('Note added successfully')
+        refresh()
+        clearForm()
+      }
     } catch (error) {
       setMessage('Failed to add note')
     }
@@ -52,12 +62,17 @@ const Form = (props) => {
   }
 
   const handleDate = () => {
-    let currDate = new Date()
+    const currDate = new Date()
+    const month = currDate.getMonth() + 1
+    const day = currDate.getDate()
+    const year = currDate.getFullYear()
+    const date = `${month}/${day}/${year}`
+    console.log(date)
     setForm({
       ...form,
-      date_added: `${currDate.getMonth() + 1}/${currDate.getDate()}/${currDate.getFullYear()}`
+      date_added: date,
     })
-    console.log(form.date_added)
+    console.log(form)
   }
 
   const handleSubmit = (e) => {
@@ -76,9 +91,10 @@ const Form = (props) => {
               maxLength="255"
               name="content"
               id="content-input"
-              placeholder='type your note here'
+              placeholder='Type your note here'
               value={form.content}
               onChange={handleChange}
+              autoComplete="off"
               required
             />
           </div>
@@ -93,9 +109,10 @@ const Form = (props) => {
               maxLength="255"
               name="attachment"
               id="attachment-input"
-              placeholder='(optional) add a link to your note'
+              placeholder='(optional) Add a link to your note'
               value={form.attachment}
               onChange={handleChange}
+              autoComplete="off"
             />
           </div>
           <div className="form-col-1 custom-select">
@@ -103,6 +120,7 @@ const Form = (props) => {
               name="priority"
               id="priority-input"
               onChange={handleChange}
+              value={form.priority}
               required>
                 <option value="0">Priority</option>
                 <option value="1">Low</option>
@@ -117,31 +135,3 @@ const Form = (props) => {
 }
 
 export default Form;
-
-  // /* The PUT method edits an existing entry in the mongodb database. */
-  // const putData = async (form) => {
-  //   const { id } = router.query
-
-  //   try {
-  //     const res = await fetch(`/api/pets/${id}`, {
-  //       method: 'PUT',
-  //       headers: {
-  //         Accept: contentType,
-  //         'Content-Type': contentType,
-  //       },
-  //       body: JSON.stringify(form),
-  //     })
-
-  //     // Throw error with status code in case Fetch API req failed
-  //     if (!res.ok) {
-  //       throw new Error(res.status)
-  //     }
-
-  //     const { data } = await res.json()
-
-  //     mutate(`/api/pets/${id}`, data, false) // Update the local data without a revalidation
-  //     router.push('/')
-  //   } catch (error) {
-  //     setMessage('Failed to update pet')
-  //   }
-  // }
