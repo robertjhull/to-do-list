@@ -1,5 +1,5 @@
 table {
-    margin: 5% auto;
+    margin: 0 auto;
     text-align: left;
     border-collapse: collapse;
     /* background-color: white;
@@ -7,15 +7,35 @@ table {
 }
 
 @media screen and (min-width: 901px) {
-    table {
+    table, #sorting-row {
         width: 75%;
     }
 }
 
 @media screen and (max-width: 900px) {
-    table {
+    table, #sorting-row {
         width: 90%;
     }
+}
+
+#sorting-row {
+    text-align: right;
+    margin: 0 auto;
+    padding: 1%;
+}
+
+#sorting-row li {
+    display:inline-block;
+}
+
+#sorting-row li:nth-child(2) {
+    width: 70px;
+    margin: 0 5px;
+}
+
+#sorting-row li a {
+    color:inherit;
+    user-select: none;
 }
 
 tr {

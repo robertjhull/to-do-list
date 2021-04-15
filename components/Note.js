@@ -13,7 +13,7 @@ export default function Note(props) {
     }, [finished])
 
     return (
-        <tr>
+        <tr className="note-row">
             {/* Checkbox that sets finished status of note */}
             <td className="td-finished">
                 {finished ?

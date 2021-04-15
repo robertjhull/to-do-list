@@ -1,5 +1,5 @@
 form {
-  margin: auto;
+  margin: 0 auto 5% auto;
   display:flex;
   flex-direction: column;
 }

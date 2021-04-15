@@ -4,18 +4,23 @@ import { parseCookies } from '../../utils/cookies';
 import Form from '../../components/Form'
 import Note from '../../components/Note'
 import Navbar from '../../components/Nav'
+import SVGCaret from '../../public/caret.svg'
 
 /* Allows you to view and edit your notes */
 const NotePage = ({data}) => {
   const router = useRouter()
-  let { username, id } = JSON.parse(data.user);
-
   const contentType = 'application/json'
 
-  let [userNotes, setUserNotes] = useState([]);
+  // get user data from cookies
+  let { username, id } = JSON.parse(data.user);
 
+  let [userNotes, setUserNotes] = useState([]);
+  let [sortMethod, setSortMethod] = useState("Date")
+
+  // fetches all user notes
   const getUserNotes = async () => {
-    const res = await fetch(`/api/notes/${ id }`, {
+    console.log("sorting by ", sortMethod)
+    const res = await fetch(`/api/notes/${ id }/${ sortMethod }`, {
       method: 'GET',
       headers: {
         Accept: contentType,
@@ -31,8 +36,6 @@ const NotePage = ({data}) => {
       console.log(err)
     })
   }
-
-  getUserNotes();
 
   const updateNote = async(note_id, finished) => {
     const res = await fetch(`/api/notes/${ note_id }`, {
@@ -64,7 +67,18 @@ const NotePage = ({data}) => {
     })
   }
 
+  const sortingHandler = () => {
+    const methods = ["Date", "Priority", "Heading"]
+    const method = document.getElementById("sort-method");
+    let index = methods.indexOf(method.innerText)
+    if (index === 2) index = -1;
+    index += 1;
+    method.innerText = methods[index]
+    setSortMethod(methods[index])
+  }
+
   useEffect(() => {
+    getUserNotes();
     setTimeout(function() {
       let checkboxes = document.getElementsByClassName("finished-input")
       for (let checkbox of checkboxes) {
@@ -72,13 +86,30 @@ const NotePage = ({data}) => {
         else checkbox.checked = false;
       }
     }, 3000)
-  }, [userNotes])
+  }, [sortMethod])
 
   return (
     <>
       <Navbar />
       <h1>{ username }'s notes</h1>
       <Form user_id={ id } refresh={ getUserNotes } />
+      <ul id="sorting-row">
+        <li>Sort by:</li>
+        <li>
+          <a
+            id="sort-method"
+            className="btn-sort"
+            onClick={ sortingHandler }
+          >Date</a>
+        </li>
+        <li>
+          <SVGCaret 
+            width="10"
+            height="10"
+            fill="#fff"
+          />
+        </li>
+      </ul>
       <table>
         <thead>
         </thead>
