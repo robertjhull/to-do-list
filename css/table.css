@@ -8,7 +8,7 @@ table {
 
 @media screen and (min-width: 901px) {
     table, #sorting-row {
-        width: 75%;
+        width: 60%;
     }
 }
 
@@ -41,7 +41,7 @@ table {
 tr {
     transition: box-shadow 400ms ease-in-out;
     height: 30px;
-    border: 1px solid #22222280;
+    border: 1px solid #808080;
 }
 
 tr:hover .svg-delete {
@@ -50,22 +50,11 @@ tr:hover .svg-delete {
 }
 
 td {
-    color: #fff;
+    color: #000;
     transition: all 300ms ease-in-out;
 }
 
-td a {
-    text-decoration: none;
-    color: inherit;
-    transition: all 300ms ease-in-out;
-}
-
-td a:hover, td a:hover .svg-link {
-    color:#0dac4f;
-    fill: #0dac4f;
-}
-
-.svg-link, .svg-delete {
+.svg-delete {
     line-height: 50px;
     vertical-align: middle;
     width:24px; 
@@ -81,10 +70,6 @@ td a:hover, td a:hover .svg-link {
 
 .svg-delete:hover {
     fill: red !important;
-}
-
-.svg-link {
-    fill: #fff;
 }
 
 .td-finished {
@@ -103,15 +88,6 @@ td a:hover, td a:hover .svg-link {
     padding: 0 5px;
 }
 
-.td-heading {
-    padding: 0 5px;
-    margin: 0;
-    font-size: .6rem;
-    text-align: center;
-    max-width: 120px;
-    font-weight: bold;
-}
-
 .td-content {
     width: 90%;
 }
@@ -123,6 +99,6 @@ td a:hover, td a:hover .svg-link {
 }
 
 .note-finished {
-    color: #d3d3d35d !important;
+    color: #7c7c7c9f !important;
     text-decoration: line-through;
 }

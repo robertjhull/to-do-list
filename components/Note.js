@@ -4,7 +4,7 @@ import DeleteSVG from '../public/delete.svg'
 
 export default function Note(props) {
     const contentType = 'application/json'
-    const { id, finished, priority, heading, content, attachment, date_added, updateNote, deleteNote } = props;
+    const { id, finished, priority, content, date_added, updateNote, deleteNote } = props;
     const priorityMark = "!".repeat(priority);
 
     useEffect(() => {
@@ -38,17 +38,7 @@ export default function Note(props) {
             <td className="td-priority">{ priorityMark }</td>
             {/* Note content */}
             <td className="td-content" id={id}>
-                {attachment ?
-                    <a href={attachment}>
-                      {content}{' '}
-                      <LinkSVG className="svg-link" />
-                    </a> :
-                    <>{content}</>
-                }{' '}
-            </td>
-            {/* Note heading */}
-            <td className="td-heading">
-                { heading && heading.toUpperCase() }
+                {content}
             </td>
             {/* Date added in format MM/DD/YYYY */}
             <td className="td-date">{date_added}</td>

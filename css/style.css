@@ -3,13 +3,11 @@
 * {
   font-family: 'Open Sans', sans-serif;
   box-sizing: border-box;
-  color:white;
+  color:#000;
 }
 
 body {
-  background: #000000;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #252525, #000000);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #252525, #000000); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background-color: #f0f0f0;
 }
 
 a {
@@ -120,11 +118,11 @@ li {
 }
 
 .btn {
-  --accent:#0dac4f;
+  --accent:#0d3fac;
   cursor: pointer;
-  background: transparent;
+  background-color: var(--accent);
   border: 1.5px solid var(--accent);
-  color: var(--accent);
+  color: #fff;
   border-radius: 10px;
   padding: 10px 15px;
   font-size: 90%;
@@ -138,8 +136,7 @@ li {
 }
 
 .btn:hover {
-  background: var(--accent);
-  color: white;
+  --accent: #3a75f5;
 }
 
 .edit.btn {
@@ -148,7 +145,14 @@ li {
 
 .delete.btn {
   --accent: red;
+  background: transparent;
+  color: var(--accent);
   margin-left: 10px;
+}
+
+.delete.btn:hover {
+  color: #fff;
+  background: var(--accent)
 }
 
 /* Delete Pet */

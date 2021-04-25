@@ -13,17 +13,6 @@ const Note = new Schema({
     required: [true, "Note must have content"],
     maxLength: [255, "Note cannot be longer than 255 characters"],
   },
-  attachment: {
-    /* Attached link or file */
-    type: String,
-    required: [false],
-    maxLength: [255, "Attachment cannot be longer than 255 characters"]
-  },
-  heading: {
-    type: String,
-    required: [false],
-    maxLength: [20, "Heading cannot be longer than 20 characters"]
-  },
   priority: {
     /* Priority of the note */
     required: [false],

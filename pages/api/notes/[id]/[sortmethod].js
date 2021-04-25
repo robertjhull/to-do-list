@@ -28,12 +28,6 @@ export default async function handler(req, res) {
                 priority: -1 
             })
             break;
-        case 'Heading':
-            notes = await Note.find({ user_id : { $eq: id }}).sort({
-                finished: false,
-                heading: -1 
-            })
-            break;
         default:
             notes = await Note.find({ user_id : { $eq: id }}).sort({
                 finished: false,

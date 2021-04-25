@@ -9,8 +9,6 @@ const Form = (props) => {
   const [form, setForm, getForm] = useState({
     user_id: user_id,
     content: "",
-    attachment: "",
-    heading: "",
     priority: 0,
     date_added: "",
     finished: false
@@ -20,8 +18,6 @@ const Form = (props) => {
     setForm({
       ...form,
       content: "",
-      attachment: "",
-      heading: "",
       priority: 0
     })
   }
@@ -88,8 +84,7 @@ const Form = (props) => {
     <>
       <form onSubmit={handleSubmit}>
         <div className="form-row">
-          <div className="form-col-8">
-            <input
+          <input
               type="text"
               maxLength="255"
               name="content"
@@ -100,38 +95,7 @@ const Form = (props) => {
               autoComplete="off"
               required
             />
-          </div>
-          <div className="form-col-2">
-            <button type="submit" className="btn">+ New Note</button>
-          </div>
-        </div>
-        <div className="form-row">
-          <div className="form-col-6">
-            <input
-              type="text"
-              maxLength="255"
-              name="attachment"
-              id="attachment-input"
-              placeholder='(optional) Add a link to your note'
-              value={form.attachment}
-              onChange={handleChange}
-              autoComplete="off"
-            />
-          </div>
-          <div className="form-col-2">
-            <input
-              type="text"
-              maxLength="20"
-              name="heading"
-              id="heading-input"
-              placeholder='(opt) Heading'
-              value={form.heading}
-              onChange={handleChange}
-              autoComplete="on"
-            />
-          </div>
-          <div className="form-col-1">
-            <select
+          <select
               name="priority"
               id="priority-input"
               onChange={handleChange}
@@ -141,8 +105,8 @@ const Form = (props) => {
                 <option value="1">Low</option>
                 <option value="2">Medium</option>
                 <option value="3">High</option>
-            </select>
-          </div>
+          </select>
+          <button type="submit" className="btn"></button>
         </div>
       </form>
     </>

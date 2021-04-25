@@ -68,10 +68,10 @@ const NotePage = ({data}) => {
   }
 
   const sortingHandler = () => {
-    const methods = ["Date", "Priority", "Heading"]
+    const methods = ["Date", "Priority"]
     const method = document.getElementById("sort-method");
     let index = methods.indexOf(method.innerText)
-    if (index === 2) index = -1;
+    if (index === 1) index = -1;
     index += 1;
     method.innerText = methods[index]
     setSortMethod(methods[index])
@@ -91,7 +91,7 @@ const NotePage = ({data}) => {
   return (
     <>
       <Navbar />
-      <h1>{ username }'s notes</h1>
+      <h1>{ username }'s to-do list</h1>
       <Form user_id={ id } refresh={ getUserNotes } />
       <ul id="sorting-row">
         <li>Sort by:</li>
@@ -106,7 +106,7 @@ const NotePage = ({data}) => {
           <SVGCaret 
             width="10"
             height="10"
-            fill="#fff"
+            fill="#000"
           />
         </li>
       </ul>
@@ -121,9 +121,7 @@ const NotePage = ({data}) => {
                   id={note._id}
                   finished={note.finished}
                   priority={note.priority}
-                  heading={note.heading}
                   content={note.content}
-                  attachment={note.attachment}
                   date_added={note.date_added}
                   updateNote={ updateNote }
                   deleteNote={ deleteNote }
