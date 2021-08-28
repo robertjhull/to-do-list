@@ -9,7 +9,28 @@ A web application for creating to-do lists and reminders. Reminders can contain 
 After cloning the repository:
 
 ```
-cd to-do-list
+cd server
 npm install
+npm seed
+```
+
+Then for the front-end:
+
+```
+cd client
+npm install
+```
+
+Start the server:
+
+```
+cd server
+npm run dev
+```
+
+Start the client:
+
+```
+cd client
 npm start
 ```
