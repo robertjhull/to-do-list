@@ -1,9 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { Route, Switch, withRouter } from "react-router-dom";
+import { Route, Switch, withRouter, RouteComponentProps } from "react-router-dom";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
+import { User } from "./interface/User";
 
-const Routes = (props) => {
+// interface Props {
+//   user: User;
+// }
+
+// type RouteProps = Props & RouteComponentProps;
+
+const Routes = (props: RouteComponentProps) => {
 // const [errorMessage, setErrorMessage] = useState("");
 
 //   useEffect(() => {
@@ -22,28 +29,22 @@ const Routes = (props) => {
 //   }
 
   return (
-    <>
-      <Switch>
-        <Route 
-          path="/login" 
-          render={(routeProps) => (
-            <Login {...routeProps} />
-          )}
-        />
-        <Route 
-          path="/register" 
-          render={(routeProps) => (
-            <Login {...routeProps} />
-          )}
-        />
-        <Route
-          exact
-          path="/"
-          render={(props) => (props.user?.id ? <Dashboard /> : <Login />)}
-        />
-        <Route path="/dashboard" component={Dashboard} />
-      </Switch>
-    </>
+    <Switch>
+      <Route 
+        path="/login" 
+        component={Login}
+      />
+      <Route 
+        path="/register" 
+        component={Login}
+      />
+      <Route
+        exact
+        path="/"
+        component={Dashboard}
+      />
+      <Route path="/dashboard" component={Dashboard} />
+    </Switch>
   );
 };
 

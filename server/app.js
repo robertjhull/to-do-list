@@ -1,8 +1,12 @@
 const express = require('express');
-const { join } = require("path");
-const jwt = require("jsonwebtoken");
-const db = require("./db");
-const { User } = require("./db/models");
+const { join } = require('path');
+const jwt = require('jsonwebtoken');
+const session = require("express-session");
+const SequelizeStore = require("connect-session-sequelize")(session.Store);
+const db = require('./db');
+const { User } = require('./db/models');
+// create store for sessions to persist in database
+const sessionStore = new SequelizeStore({ db });
 
 const { json, urlencoded } = express;
 
@@ -10,7 +14,6 @@ const app = express();
 
 require('dotenv').config();
 
-app.use(logger("dev"));
 app.use(json());
 app.use(urlencoded({ extended: false }));
 app.use(express.static(join(__dirname, "public")));
@@ -55,4 +58,4 @@ app.use(function (req, res, next) {
     res.json({ error: err });
   });
   
-  module.exports = { app };
+  module.exports = { app, sessionStore };

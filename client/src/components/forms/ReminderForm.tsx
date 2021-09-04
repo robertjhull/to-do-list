@@ -1,7 +1,11 @@
 import { useState, useEffect, FormEvent, ChangeEvent } from 'react'
 // import { useRouter } from 'next/router'
 
-export default function ReminderForm(userId: number): JSX.Element {
+interface Props {
+  userId: string;
+}
+
+export default function ReminderForm({ userId }: Props): JSX.Element {
   const contentType = 'application/json'
   const [message, setMessage] = useState('')
   const [form, setForm] = useState({

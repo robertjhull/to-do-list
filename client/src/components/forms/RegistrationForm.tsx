@@ -1,6 +1,8 @@
 import { ChangeEvent, FormEvent, useState } from 'react'
+import { useHistory } from 'react-router-dom';
 
 export default function RegistrationForm(): JSX.Element {
+  const history = useHistory();
   let [form, setForm] = useState({
     username: '',
     password: '',
@@ -37,7 +39,7 @@ export default function RegistrationForm(): JSX.Element {
     <>
       <form className="login-form" onSubmit={handleSubmit}>
         <h2>Register</h2>
-        <p>Already registered? <button>Login here.</button></p>
+        <p>Already registered? <button onClick={() => history.push('/login')}>Login here.</button></p>
         <label htmlFor="username">Username</label>
         <input
             type="text"
