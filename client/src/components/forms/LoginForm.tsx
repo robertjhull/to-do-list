@@ -1,4 +1,5 @@
-import React, { ChangeEvent, FormEvent, useState } from 'react'
+import React, { ChangeEvent, FormEvent, ReactNode, useState } from 'react';
+import { Alert, Button, Form, FormControl } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 
 export default function LoginForm(): JSX.Element {
@@ -32,36 +33,35 @@ export default function LoginForm(): JSX.Element {
   }
 
   return (
-    <>
-      <form className="login-form" onSubmit={handleSubmit}>
-        <h2>Sign In</h2>
-        <p>Or <button onClick={() => history.push('/login')}>register here.</button></p>
-        <label htmlFor="username">Username</label>
-        <input
+    <Form className="login-form" onSubmit={handleSubmit}>
+      <h2>Sign In</h2>
+      <Form.Text>Or
+        <Button variant="link" onClick={() => history.push('/login')}>register here.</Button>
+      </Form.Text>
+      <Form.Group> 
+        <Form.Label htmlFor="username">Username</Form.Label>
+        <Form.Control
             type="text"
             maxLength={20}
             name="username"
             onChange={handleChange}
             required
         />
-        <label htmlFor="password">Password</label>
-        <input
+      </Form.Group>
+      <Form.Group>
+        <Form.Label htmlFor="password">Password</Form.Label>
+        <Form.Control
             type="password"
             maxLength={20}
             name="password"
             onChange={handleChange}
             required
         />
-        <div>
-            {Object.values(errors).map((err, index) => (
-              <li key={index} className="error">error</li>
-            ))}
-        </div>
-        <span className="error">message</span>
-        <div className="btn-container">
-            <button type="submit" className="btn">Sign In</button>
-        </div>
-      </form>
-    </>
+      </Form.Group>
+      {errors && Object.values(errors).map((message: any, idx: number): ReactNode => {
+        return (<Alert key={idx} variant="danger">{message}</Alert>)
+      })}
+      <Button variant="primary">Sign In</Button>
+    </Form>
   )
 }

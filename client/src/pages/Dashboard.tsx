@@ -1,12 +1,15 @@
 import ReminderForm from "../components/forms/ReminderForm";
-import Navbar from "../components/dashboard/Navbar";
+import Navigation from "../components/dashboard/Navigation";
+import { Col, Container } from "react-bootstrap";
 
 export default function Dashboard(): JSX.Element {
   return (
-    <>
-      <Navbar />
-      <h1>{''}'s reminders</h1>
-      <ReminderForm userId={'userId'}/>
-    </>
+    <Container>
+      <Navigation />
+      <Col>
+        <h2>{''}'s reminders</h2>
+        <ReminderForm userId={'userId'}/>
+      </Col>
+    </Container>
   )
 }

@@ -1,4 +1,5 @@
 import { useState, useEffect, FormEvent, ChangeEvent } from 'react'
+import { Button, ButtonGroup, ToggleButton, Col, Form, Row, ToggleButtonGroup } from 'react-bootstrap'
 // import { useRouter } from 'next/router'
 
 interface Props {
@@ -11,7 +12,7 @@ export default function ReminderForm({ userId }: Props): JSX.Element {
   const [form, setForm] = useState({
     user_id: userId,
     content: "",
-    priority: 0,
+    priority: "0",
     date_added: "",
     finished: false
   })
@@ -20,7 +21,14 @@ export default function ReminderForm({ userId }: Props): JSX.Element {
     setForm({
       ...form,
       content: "",
-      priority: 0
+      priority: ""
+    })
+  }
+
+  const setPriority = (value: string) => {
+    setForm({
+      ...form,
+      priority: value
     })
   }
 
@@ -76,34 +84,38 @@ export default function ReminderForm({ userId }: Props): JSX.Element {
   }, [])
 
   return (
-    <>
-      <form onSubmit={handleSubmit}>
-        <div className="form-row">
-          <input
-              type="text"
-              maxLength={255}
-              name="content"
-              id="content-input"
-              placeholder='Type your note here'
-              value={form.content}
-              onChange={handleChange}
-              autoComplete="off"
-              required
-            />
-          <select
-              name="priority"
-              id="priority-input"
-              onChange={handleChange}
-              value={form.priority}
-              required>
-                <option value="0">Priority</option>
-                <option value="1">Low</option>
-                <option value="2">Medium</option>
-                <option value="3">High</option>
-          </select>
-          <button type="submit" className="btn"></button>
-        </div>
-      </form>
-    </>
+    <Form onSubmit={handleSubmit}>
+      <Row>
+          <Col lg={8}>
+            <Form.Control
+                type="text"
+                maxLength={255}
+                name="content"
+                id="content-input"
+                placeholder='Type your note here'
+                value={form.content}
+                onChange={handleChange}
+                autoComplete="off"
+                required
+              />
+          </Col>
+          <Col lg={2}>
+          <ToggleButtonGroup type="radio" name="priority" onChange={setPriority}>
+            <ToggleButton id="tbg-btn-1" variant="danger" value={1}>
+              !
+            </ToggleButton>
+            <ToggleButton id="tbg-btn-2" variant="danger" value={2}>
+              !!
+            </ToggleButton>
+            <ToggleButton id="tbg-btn-3" variant="danger" value={3}>
+              !!!
+            </ToggleButton>
+          </ToggleButtonGroup>
+          </Col>
+          <Col lg={2}>
+            <Button variant="primary" type="submit">Add +</Button>
+          </Col>
+      </Row>
+    </Form>
   )
 }

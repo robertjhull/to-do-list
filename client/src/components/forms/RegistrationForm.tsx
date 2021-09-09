@@ -1,14 +1,15 @@
 import { ChangeEvent, FormEvent, useState } from 'react'
 import { useHistory } from 'react-router-dom';
+import { Alert, Button, Form } from 'react-bootstrap';
 
 export default function RegistrationForm(): JSX.Element {
   const history = useHistory();
-  let [form, setForm] = useState({
+  const [form, setForm] = useState({
     username: '',
     password: '',
     confirm_password: '',
   });
-  let [errors, setErrors] = useState({})
+  const [errors, setErrors] = useState({})
 
   const handleChange = (e: ChangeEvent) => {
     // const { name, value } = e.target;
@@ -36,44 +37,49 @@ export default function RegistrationForm(): JSX.Element {
   }
 
   return (
-    <>
-      <form className="login-form" onSubmit={handleSubmit}>
-        <h2>Register</h2>
-        <p>Already registered? <button onClick={() => history.push('/login')}>Login here.</button></p>
-        <label htmlFor="username">Username</label>
-        <input
-            type="text"
-            maxLength={20}
-            name="username"
-            onChange={handleChange}
-            required
+    <Form className="login-form" onSubmit={handleSubmit}>
+      <h2>Register</h2>
+      <Form.Text>Already registered?
+        <Button variant="link" onClick={() => history.push('/login')}>Login here.</Button>
+      </Form.Text>
+      <Form.Group>
+        <Form.Label htmlFor="username">Username</Form.Label>
+        <Form.Control
+          type="text"
+          maxLength={20}
+          name="username"
+          onChange={handleChange}
+          required
         />
-        <label htmlFor="password">Password</label>
-        <input
-            type="password"
-            maxLength={20}
-            name="password"
-            onChange={handleChange}
-            required
+      </Form.Group>
+      <Form.Group>
+        <Form.Label htmlFor="password">Password</Form.Label>
+        <Form.Control
+          type="password"
+          maxLength={20}
+          name="password"
+          onChange={handleChange}
+          required
         />
-        <label htmlFor="confirm_password">Confirm Password</label>
-        <input
-            type="password"
-            maxLength={20}
-            name="confirm_password"
-            onChange={handleChange}
-            required
+        <Form.Label htmlFor="confirmPassword">Confirm Password</Form.Label>
+        <Form.Control
+          type="password"
+          maxLength={20}
+          name="confirmPassword"
+          onChange={handleChange}
+          required
+          aria-describedby="passwordHelp"
         />
-        <div>
-            {Object.values(errors).map((err, index) => (
-                <li key={index} className="error">err</li>
-            ))}
-        </div>
-        <span className="error">message</span>
-        <div className="btn-container">
-            <button type="submit" className="btn">Register</button>
-        </div>
-      </form>
-    </>
+        <Form.Text id ="passwordHelp">
+          Password must be 8-20 characters long
+        </Form.Text>
+      </Form.Group>
+      <Form.Group>
+        {errors && Object.values(errors).map((message: any, idx) => (
+          <Alert key={idx} variant="danger">{message}</Alert>
+        ))}
+        <Button variant="primary">Register</Button>
+      </Form.Group>
+    </Form>
   )
 }
