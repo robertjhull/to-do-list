@@ -1,3 +1,5 @@
+**This project is being updated right now and will not work correctly**
+
 # About
 
 A web application for creating to-do lists and reminders. Reminders can contain the following info: text, priority, and date added. To mark a reminder as completed, check the box on the left side of the reminder.

@@ -1,55 +1,44 @@
-import react, { useEffect } from 'react'
+import react, { useEffect } from 'react';
+import { Reminder } from "../../interface/Reminder";
 // import LinkSVG from '../public/link.svg'
 // import DeleteSVG from '../public/delete.svg'
 
-interface Props {
-  id: string,
-  finished: boolean,
-  priority: number,
-  content: string,
-  dateAdded: Date,
-  updateNote: () => void,
-  deleteNote: () => void,
-}
-
-export default function Note(props: Props): JSX.Element {
+export default function Note(reminder: Reminder): JSX.Element {
     const contentType = 'application/json'
-    const { id, finished, priority, content, dateAdded, updateNote, deleteNote } = props;
+    const { id, title, date, completed, priority } = reminder;
     const priorityMark = "!".repeat(priority);
 
     // useEffect(() => {
-    //     if (finished) { document.getElementById(id).className = "note-finished" }
+    //     if (completed) { document.getElementById(id).className = "note-completed" }
     //     else { document.getElementById(id).className = "" }
-    // }, [id, finished])
+    // }, [id, completed])
 
     return (
         <tr className="note-row">
-            {/* Checkbox that sets finished status of note */}
-            <td className="td-finished">
-                {finished ?
+            {/* Checkbox that sets completed status of note */}
+            <td className="td-completed">
+                {completed ?
                     <input 
                       type="checkbox"
-                      className="finished-input"
-                      name="finished"
-                      onChange={ () => updateNote() }
+                      className="completed-input"
+                      name="completed"
                       checked
                     ></input> :
                     <input 
                       type="checkbox"
-                      className="finished-input"
-                      name="finished" 
-                      onChange={ () => updateNote() }
+                      className="completed-input"
+                      name="completed" 
                     ></input>
                 }
             </td>
             {/* Priority of note */}
             <td className="td-priority">{ priorityMark }</td>
             {/* Note content */}
-            <td className="td-content" id={id}>
-                {content}
+            <td className="td-title" id={id}>
+                {title}
             </td>
             {/* Date added in format MM/DD/YYYY */}
-            <td className="td-date">{dateAdded}</td>
+            <td className="td-date">{date.getDate()}</td>
             {/* Delete button */}
             <td className="td-delete">
                 {/* <DeleteSVG 

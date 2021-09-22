@@ -1,9 +1,14 @@
 import { useState, useEffect, FormEvent, ChangeEvent } from 'react'
-import { Button, ButtonGroup, ToggleButton, Col, Form, Row, ToggleButtonGroup } from 'react-bootstrap'
+import { Button, ButtonGroup, ToggleButton, Col, Form, Row } from 'react-bootstrap'
 // import { useRouter } from 'next/router'
 
 interface Props {
   userId: string;
+}
+
+interface Radio {
+  name: string;
+  value: number;
 }
 
 export default function ReminderForm({ userId }: Props): JSX.Element {
@@ -12,7 +17,7 @@ export default function ReminderForm({ userId }: Props): JSX.Element {
   const [form, setForm] = useState({
     user_id: userId,
     content: "",
-    priority: "0",
+    priority: 0,
     date_added: "",
     finished: false
   })
@@ -21,11 +26,11 @@ export default function ReminderForm({ userId }: Props): JSX.Element {
     setForm({
       ...form,
       content: "",
-      priority: ""
+      priority: 0
     })
   }
 
-  const setPriority = (value: string) => {
+  const setPriority = (value: number) => {
     setForm({
       ...form,
       priority: value
@@ -83,6 +88,12 @@ export default function ReminderForm({ userId }: Props): JSX.Element {
     handleDate()
   }, [])
 
+  const radios = [
+    { name: '!', value: 1 },
+    { name: '!!', value: 2 },
+    { name: '!!!', value: 3 },
+  ];
+
   return (
     <Form onSubmit={handleSubmit}>
       <Row>
@@ -100,17 +111,22 @@ export default function ReminderForm({ userId }: Props): JSX.Element {
               />
           </Col>
           <Col lg={2}>
-          <ToggleButtonGroup type="radio" name="priority" onChange={setPriority}>
-            <ToggleButton id="tbg-btn-1" variant="danger" value={1}>
-              !
-            </ToggleButton>
-            <ToggleButton id="tbg-btn-2" variant="danger" value={2}>
-              !!
-            </ToggleButton>
-            <ToggleButton id="tbg-btn-3" variant="danger" value={3}>
-              !!!
-            </ToggleButton>
-          </ToggleButtonGroup>
+            <ButtonGroup>
+              {radios.map((radio: Radio, idx: number): JSX.Element => (
+                <ToggleButton
+                  key={idx}
+                  id={`radio-${idx}`}
+                  type="radio"
+                  variant="danger"
+                  name="radio"
+                  value={radio.value}
+                  checked={form.priority === radio.value}
+                  onChange={(e) => setPriority(Number(e.currentTarget.value))}
+                >
+                  {radio.name}
+                </ToggleButton>
+              ))}
+            </ButtonGroup>
           </Col>
           <Col lg={2}>
             <Button variant="primary" type="submit">Add +</Button>
