@@ -8,7 +8,7 @@ export default function Navigation() {
   }
 
   return (
-    <Navbar>
+    <Navbar expand="lg" variant="light" bg="light">
       <Nav>
         <Nav.Link onClick={ logout }>Logout</Nav.Link>
       </Nav>

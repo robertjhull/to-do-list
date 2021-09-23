@@ -37,31 +37,6 @@ export default function ReminderForm({ userId }: Props): JSX.Element {
     })
   }
 
-  /* The POST method adds a new entry in the mongodb database. */
-  // const postData = async (form) => {
-  //   try {
-  //     const res = await fetch('/api/notes', {
-  //       method: 'POST',
-  //       headers: {
-  //         Accept: contentType,
-  //         'Content-Type': contentType,
-  //       },
-  //       body: JSON.stringify(form),
-  //     })
-
-  //     // Throw error with status code in case Fetch API req failed
-  //     if (!res.ok) {
-  //       throw new Error(`${res.status}`)
-  //     }
-  //     else { 
-  //       setMessage('Note added successfully')
-  //       clearForm()
-  //     }
-  //   } catch (error) {
-  //     setMessage('Failed to add note')
-  //   }
-  // }
-
   const handleChange = (e: ChangeEvent) => {
     console.log(e);
     // setForm({})

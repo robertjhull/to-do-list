@@ -11,14 +11,18 @@ export default function Dashboard(): JSX.Element {
     { id: "id4", title: "Finish programming project", date: new Date(), completed: false, priority: 3 }
   ];
 
+  const user = "Robert";
+
   return (
-    <Container>
+    <>
       <Navigation />
-      <Col>
-        <h2>{''}'s reminders</h2>
-        <ReminderForm userId={'userId'} />
-        <ReminderList {...reminders}/>
-      </Col>
-    </Container>
+      <Container>
+        <Col>
+          <h2>{user}'s reminders</h2>
+          <ReminderForm userId={'userId'} />
+          <ReminderList {...reminders}/>
+        </Col>
+      </Container>
+    </>
   )
 }
