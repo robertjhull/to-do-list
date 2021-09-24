@@ -12,7 +12,6 @@ interface Radio {
 }
 
 export default function ReminderForm({ userId }: Props): JSX.Element {
-  const contentType = 'application/json'
   const [message, setMessage] = useState('')
   const [form, setForm] = useState({
     user_id: userId,
