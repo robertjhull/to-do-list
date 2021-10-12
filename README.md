@@ -1,4 +1,4 @@
-**This project is being updated right now and will not work correctly**
+**(this project is currently being updated)**
 
 # About
 
