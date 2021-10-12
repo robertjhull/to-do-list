@@ -15,7 +15,7 @@ export default function RegistrationForm(): JSX.Element {
     // const { name, value } = e.target;
     // setForm()
   }
-
+ 
   const handleSubmit = (e: FormEvent) => {
       e.preventDefault()
       const errs = formValidate()

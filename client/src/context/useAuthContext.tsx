@@ -21,8 +21,8 @@ export const AuthProvider: FunctionComponent = ({ children }): JSX.Element => {
   const reminders = [
     { id: "id1", title: "Do laundry", date: new Date(), completed: false, priority: 1 },
     { id: "id2", title: "Buy groceries", date: new Date(), completed: false, priority: 2 },
-    { id: "id3", title: "Pay rent", date: new Date(), completed: true, priority: 0 },
-    { id: "id4", title: "Finish programming project", date: new Date(), completed: false, priority: 3 }
+    { id: "id4", title: "Finish programming project", date: new Date(), completed: false, priority: 3 },
+    { id: "id3", title: "Pay rent", date: new Date(), completed: true, priority: 0 }
   ];
 
   const user = { id: "01", username: "Robert" };

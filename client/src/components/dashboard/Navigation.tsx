@@ -1,4 +1,4 @@
-import { Navbar, Nav } from 'react-bootstrap';
+import { Navbar, Nav, Container } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 import { User } from "../../interface/User";
 
@@ -9,13 +9,18 @@ export default function Navigation({ id, username }: User): JSX.Element {
   }
 
   return (
-    <Navbar expand="lg" variant="dark" bg="primary" className="justify-content-end">
-      <Nav>
+    <Navbar expand="lg" bg="dark" variant="dark">
+      <Container>
+        <Navbar.Brand>Reminders</Navbar.Brand>
+      </Container>
+      <Navbar.Collapse className="justify-content-end">
         <Navbar.Text>
-          Hello {username}
+          Welcome back, {username}
         </Navbar.Text>
-        <Nav.Link onClick={ logout }>Logout</Nav.Link>
-      </Nav>
+        <Nav.Link onClick={logout}>
+          Logout
+        </Nav.Link>
+      </Navbar.Collapse>
     </Navbar>
   )
 }

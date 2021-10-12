@@ -1,5 +1,5 @@
 import { useState, useEffect, FormEvent, ChangeEvent } from 'react'
-import { Button, ButtonGroup, ToggleButton, Col, Form, Row } from 'react-bootstrap'
+import { Button, ButtonGroup, Col, Form, Row, Container } from 'react-bootstrap'
 // import { useRouter } from 'next/router'
 
 interface Props {
@@ -30,9 +30,10 @@ export default function ReminderForm({ userId }: Props): JSX.Element {
   }
 
   const setPriority = (value: number) => {
+    const priority = value === form.priority ? 0 : value;
     setForm({
       ...form,
-      priority: value
+      priority: priority
     })
   }
 
@@ -69,42 +70,40 @@ export default function ReminderForm({ userId }: Props): JSX.Element {
   ];
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit} style={{marginTop: '50px'}}>
       <Row>
-          <Col lg={8}>
-            <Form.Control
-                type="text"
-                maxLength={255}
-                name="content"
-                id="content-input"
-                placeholder='Type your note here'
-                value={form.content}
-                onChange={handleChange}
-                autoComplete="off"
-                required
-              />
-          </Col>
-          <Col lg={2}>
-            <ButtonGroup>
-              {radios.map((radio: Radio, idx: number): JSX.Element => (
-                <ToggleButton
-                  key={idx}
-                  id={`radio-${idx}`}
-                  type="radio"
-                  variant="danger"
-                  name="radio"
-                  value={radio.value}
-                  checked={form.priority === radio.value}
-                  onChange={(e) => setPriority(Number(e.currentTarget.value))}
-                >
-                  {radio.name}
-                </ToggleButton>
-              ))}
-            </ButtonGroup>
-          </Col>
-          <Col lg={2}>
-            <Button variant="primary" type="submit">Add +</Button>
-          </Col>
+        <Col lg={10}>
+          <Form.Control
+              type="text"
+              maxLength={255}
+              name="content"
+              id="content-input"
+              placeholder='Type your reminder here'
+              value={form.content}
+              onChange={handleChange}
+              autoComplete="off"
+              required
+            />
+        </Col>
+        <Col lg={1}>
+          <ButtonGroup>
+            {radios.map((radio: Radio, idx: number): JSX.Element => (
+              <Button
+                key={idx}
+                id={`radio-${idx}`}
+                variant="danger"
+                name="radio"
+                onClick={(e) => setPriority(radio.value)}
+                style={form.priority === radio.value ? {backgroundColor: '#d00000'} : {}}
+              >
+                {radio.name}
+              </Button>
+            ))}
+          </ButtonGroup>
+        </Col>
+        <Col lg={1}>
+          <Button variant="primary" type="submit">Add</Button>
+        </Col>
       </Row>
     </Form>
   )
