@@ -30,18 +30,10 @@ const Routes = (props: RouteComponentProps) => {
 
   return (
     <Switch>
-      <Route 
-        path="/login" 
-        component={Login}
-      />
-      <Route 
-        path="/register" 
-        component={Login}
-      />
       <Route
         exact
-        path="/"
-        component={Dashboard}
+        path="/login"
+        component={Login}
       />
       <Route path="/dashboard" component={Dashboard} />
     </Switch>

@@ -2,15 +2,16 @@ import { useState, useContext, createContext, FunctionComponent, useEffect, useC
 import { useHistory } from 'react-router-dom';
 import { User } from '../interface/User';
 import { Reminder } from '../interface/Reminder';
+import { AuthApiDataSuccess } from '../interface/AuthApiDataSuccess';
 
 interface IAuthContext {
   user: User;
-  reminders: Reminder[];
+  updateLoginContext: (data: AuthApiDataSuccess) => void;
 }
 
 export const AuthContext = createContext<IAuthContext>({
   user: {} as User,
-  reminders: [{} as Reminder],
+  updateLoginContext: () => null,
 });
 
 export const AuthProvider: FunctionComponent = ({ children }): JSX.Element => {
@@ -18,14 +19,25 @@ export const AuthProvider: FunctionComponent = ({ children }): JSX.Element => {
   const [loggedInUser, setLoggedInUser] = useState<User | null | undefined>();
   const history = useHistory();
 
-  const reminders = [
-    { id: "id1", title: "Do laundry", date: new Date(), completed: false, priority: 1 },
-    { id: "id2", title: "Buy groceries", date: new Date(), completed: false, priority: 2 },
-    { id: "id4", title: "Finish programming project", date: new Date(), completed: false, priority: 3 },
-    { id: "id3", title: "Pay rent", date: new Date(), completed: true, priority: 0 }
-  ];
+  const user = { 
+    id: "01", 
+    username: "Robert",
+    email: "demo@mail.com",
+    reminders: [
+      { id: "id1", title: "Do laundry", date: new Date(), completed: false, priority: 1 },
+      { id: "id2", title: "Buy groceries", date: new Date(), completed: false, priority: 2 },
+      { id: "id4", title: "Finish programming project", date: new Date(), completed: false, priority: 3 },
+      { id: "id3", title: "Pay rent", date: new Date(), completed: true, priority: 0 }
+    ]
+   };
 
-  const user = { id: "01", username: "Robert" };
+  const updateLoginContext = useCallback(
+    (user) => {
+      setLoggedInUser(user);
+      history.push('/dashboard');
+    },
+    [history],
+  );
 
 
   // const logout = useCallback(async () => {
@@ -56,7 +68,7 @@ export const AuthProvider: FunctionComponent = ({ children }): JSX.Element => {
   // }, [updateLoginContext, history]);
 
   return (
-    <AuthContext.Provider value={{ user, reminders }}>
+    <AuthContext.Provider value={{ user, updateLoginContext }}>
       {children}
     </AuthContext.Provider>
   );

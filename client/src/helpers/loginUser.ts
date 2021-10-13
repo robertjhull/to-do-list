@@ -1,10 +1,10 @@
 import { FetchOptions } from "../interface/FetchOptions";
 
-const loginUser = async (email: string, password: string): Promise<any> => {
+const loginUser = async (username: string, password: string): Promise<any> => {
   const fetchOptions: FetchOptions = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email, password }),
+    body: JSON.stringify({ username, password }),
     credentials: 'include',
   };
   return await fetch(`/auth/login`, fetchOptions)

@@ -1,42 +1,53 @@
-import React, { ChangeEvent, FormEvent, ReactNode, useState } from 'react';
-import { Alert, Button, Form, FormControl } from 'react-bootstrap';
-import { useHistory } from 'react-router-dom';
+import React, { ChangeEvent, FormEvent, ReactNode, useState } from "react";
+import { Alert, Button, Form, FormControl } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
+import { useAuth } from "../../context/useAuthContext";
+import loginUser from "../../helpers/loginUser";
 
 export default function LoginForm(): JSX.Element {
   const history = useHistory();
+  const { updateLoginContext } = useAuth();
   const [form, setForm] = useState({
-    username: '',
-    password: '',
+    username: "",
+    password: "",
   });
   const [errors, setErrors] = useState({});
 
   const handleChange = (e: ChangeEvent) => {
-    console.log(typeof e);
-    // setForm({});
+    const { name, value } = e.target as HTMLButtonElement;
+    setForm({
+      ...form,
+      [name]: value
+    });
   }
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
     const errs = formValidate()
-    if (Object.keys(errs).length === 0) {
-      console.log(form)
+    if (!errs.username && !errs.password) {
+      const { username, password } = form;
+      const data = await loginUser(username, password);
+      if (data.success) {
+        updateLoginContext(data.success.user);
+        history.push("/dashboard");
+      }
     } else {
       setErrors(errs);
     }
   }
   
   const formValidate = () => {
-    let err = {}
-    // if (!form.username) err.username = 'Username is required'
-    // if (!form.password) err.password = 'Password is required'
-    return err
+    const errs = { username: "", password: "" }
+    if (!form.username) errs.username = "Username is required";
+    if (!form.password) errs.password = "Password is required";
+    return errs
   }
 
   return (
     <Form className="login-form" onSubmit={handleSubmit}>
       <h2>Sign In</h2>
       <Form.Text>Or
-        <Button variant="link" onClick={() => history.push('/login')}>register here.</Button>
+        <Button variant="link" onClick={() => history.push("/login")}>register here.</Button>
       </Form.Text>
       <Form.Group> 
         <Form.Label htmlFor="username">Username</Form.Label>
@@ -61,7 +72,7 @@ export default function LoginForm(): JSX.Element {
       {errors && Object.values(errors).map((message: any, idx: number): ReactNode => {
         return (<Alert key={idx} variant="danger">{message}</Alert>)
       })}
-      <Button variant="primary">Sign In</Button>
+      <Button variant="primary" type="submit">Sign In</Button>
     </Form>
   )
 }

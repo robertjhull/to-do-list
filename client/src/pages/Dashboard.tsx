@@ -5,7 +5,7 @@ import ReminderList from "../components/dashboard/ReminderList";
 import { useAuth } from "../context/useAuthContext";
 
 export default function Dashboard(): JSX.Element {
-  const { user, reminders } = useAuth();
+  const { user } = useAuth();
 
   return (
     <>
@@ -13,7 +13,7 @@ export default function Dashboard(): JSX.Element {
       <Container>
         <Col>
           <ReminderForm userId={user.id} />
-          <ReminderList {...reminders}/>
+          <ReminderList {...user.reminders}/>
         </Col>
       </Container>
     </>
