@@ -7,6 +7,7 @@ import loginUser from "../../helpers/loginUser";
 export default function LoginForm(): JSX.Element {
   const history = useHistory();
   const { updateLoginContext } = useAuth();
+
   const [form, setForm] = useState({
     username: "",
     password: "",
@@ -22,8 +23,8 @@ export default function LoginForm(): JSX.Element {
   }
 
   const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault()
-    const errs = formValidate()
+    e.preventDefault();
+    const errs = formValidate();
     if (!errs.username && !errs.password) {
       const { username, password } = form;
       const data = await loginUser(username, password);

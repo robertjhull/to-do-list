@@ -3,19 +3,24 @@ import Navigation from "../components/dashboard/Navigation";
 import { Col, Container } from "react-bootstrap";
 import ReminderList from "../components/dashboard/ReminderList";
 import { useAuth } from "../context/useAuthContext";
+import { Redirect } from "react-router";
 
 export default function Dashboard(): JSX.Element {
-  const { user } = useAuth();
+  const { loggedInUser } = useAuth();
 
-  return (
-    <>
-      <Navigation {...user} />
-      <Container>
-        <Col>
-          <ReminderForm userId={user.id} />
-          <ReminderList {...user.reminders}/>
-        </Col>
-      </Container>
-    </>
-  )
+  if (loggedInUser) {
+    return (
+      <>
+        <Navigation {...loggedInUser} />
+        <Container>
+          <Col>
+            <ReminderForm userId={loggedInUser.id} />
+            <ReminderList {...loggedInUser.reminders}/>
+          </Col>
+        </Container>
+      </>
+    )
+  } else {
+    return <Redirect to="/login" />
+  }
 }

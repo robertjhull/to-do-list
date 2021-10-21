@@ -38,7 +38,7 @@ export default function Note(reminder: Reminder): JSX.Element {
       </td>
       {/* Date added in format M/DD */}
       <td style={dateStyle}>
-        {`${date.getMonth()}/${date.getDate()}`}
+        {`${date}`}
       </td>
       {/* Checkbox that sets completed status of note */}
       <td style={completedStyle}>

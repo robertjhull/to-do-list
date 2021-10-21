@@ -1,12 +1,10 @@
 import { Navbar, Nav, Container } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
+import { useAuth } from '../../context/useAuthContext';
 import { User } from "../../interface/User";
 
 export default function Navigation({ id, username }: User): JSX.Element {
-  const history = useHistory();
-  const logout = () => {
-    history.push("/")
-  }
+  const { logout } = useAuth();
 
   return (
     <Navbar expand="lg" bg="dark" variant="dark">
