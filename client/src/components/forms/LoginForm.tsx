@@ -4,7 +4,11 @@ import { useHistory } from "react-router-dom";
 import { useAuth } from "../../context/useAuthContext";
 import loginUser from "../../helpers/loginUser";
 
-export default function LoginForm(): JSX.Element {
+interface Props {
+  toggleForm: () => void;
+}
+
+export default function LoginForm({ toggleForm }: Props): JSX.Element {
   const history = useHistory();
   const { updateLoginContext } = useAuth();
 
@@ -48,7 +52,7 @@ export default function LoginForm(): JSX.Element {
     <Form className="login-form" onSubmit={handleSubmit}>
       <h2>Sign In</h2>
       <Form.Text>Or
-        <Button variant="link" onClick={() => history.push("/login")}>register here.</Button>
+        <Button variant="link" onClick={toggleForm}>register here.</Button>
       </Form.Text>
       <Form.Group> 
         <Form.Label htmlFor="username">Username</Form.Label>

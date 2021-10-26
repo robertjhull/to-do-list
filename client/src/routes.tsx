@@ -32,7 +32,7 @@ const Routes = (props: RouteComponentProps) => {
     <Switch>
       <Route
         exact
-        path="/login"
+        path="/"
         component={Login}
       />
       <Route path="/dashboard" component={Dashboard} />

@@ -2,7 +2,11 @@ import { ChangeEvent, FormEvent, useState } from 'react'
 import { useHistory } from 'react-router-dom';
 import { Alert, Button, Form } from 'react-bootstrap';
 
-export default function RegistrationForm(): JSX.Element {
+interface Props {
+  toggleForm: () => void;
+}
+
+export default function RegistrationForm({ toggleForm }: Props): JSX.Element {
   const history = useHistory();
   const [form, setForm] = useState({
     username: '',
@@ -40,7 +44,7 @@ export default function RegistrationForm(): JSX.Element {
     <Form className="login-form" onSubmit={handleSubmit}>
       <h2>Register</h2>
       <Form.Text>Already registered?
-        <Button variant="link" onClick={() => history.push('/login')}>Login here.</Button>
+        <Button variant="link" onClick={toggleForm}>Login here.</Button>
       </Form.Text>
       <Form.Group>
         <Form.Label htmlFor="username">Username</Form.Label>
