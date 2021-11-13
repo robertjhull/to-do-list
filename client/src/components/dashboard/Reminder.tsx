@@ -1,4 +1,3 @@
-import react, { useEffect } from 'react';
 import { Reminder } from "../../interface/Reminder";
 
 const priorityStyle = {

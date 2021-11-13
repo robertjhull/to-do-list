@@ -23,14 +23,13 @@ router.post("/", async (req, res, next) => {
 });
 
 // expects { reminderId, userID, title?, date?, priority?, completed? } in body
-router.patch("/", async (req, res, next) => {
+router.patch("/:id", async (req, res, next) => {
   try {
     if (!req.user) {
       return res.sendStatus(401);
     }
 
-    const { reminderId, userId } = req.body;
-    const reminder = await Reminder.findOne({ where: { id: reminderId } });
+    const reminder = await Reminder.findOne({ where: { id: req.params.id } });
     
     if (reminder.userId !== req.user.id) {
       console.log("userId does not match");
