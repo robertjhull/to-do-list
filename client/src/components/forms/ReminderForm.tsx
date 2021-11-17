@@ -1,5 +1,5 @@
-import { useState, useEffect, FormEvent, ChangeEvent } from 'react'
-import { Button, ButtonGroup, Col, Form, Row, Container } from 'react-bootstrap'
+import { useState, useEffect, FormEvent, ChangeEvent } from 'react';
+import { Button, ButtonGroup, Col, Form, Row } from 'react-bootstrap';
 // import { useRouter } from 'next/router'
 
 interface Props {

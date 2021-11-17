@@ -1,5 +1,5 @@
-import React, { ChangeEvent, FormEvent, ReactNode, useState } from "react";
-import { Alert, Button, Form, FormControl } from "react-bootstrap";
+import { ChangeEvent, FormEvent, ReactNode, useState } from "react";
+import { Alert, Button, Form } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import { useAuth } from "../../context/useAuthContext";
 import loginUser from "../../helpers/loginUser";

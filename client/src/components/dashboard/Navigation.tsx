@@ -1,5 +1,4 @@
 import { Navbar, Nav, Container } from 'react-bootstrap';
-import { useHistory } from 'react-router-dom';
 import { useAuth } from '../../context/useAuthContext';
 import { User } from "../../interface/User";
 
