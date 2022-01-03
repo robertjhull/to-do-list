@@ -47,6 +47,8 @@ Start the client:
 cd client
 npm start
 ```
-![todologin](https://user-images.githubusercontent.com/67487694/147904527-39bfab8a-bfc8-4d38-83a0-ad26957aa0fc.PNG)
 
-![todolist](https://user-images.githubusercontent.com/67487694/147904532-16ef74b7-684f-480c-b070-74ac02a28d07.PNG)
+![todologin](https://user-images.githubusercontent.com/67487694/147904599-0ff8f2c3-ae1e-42b5-ad91-f09f8bbc98af.PNG)
+![todolist](https://user-images.githubusercontent.com/67487694/147904600-7c41d003-a494-4ecd-bf67-1369557f193f.PNG)
+
+
